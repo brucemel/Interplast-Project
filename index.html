@@ -1,0 +1,1899 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INTERPLAST - Productos Plásticos al Por Mayor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #e94560;
+            --accent-light: #ff6b6b;
+            --surface: #f8f9fa;
+            --surface-dark: #edf2f4;
+            --text: #1a1a2e;
+            --text-light: #6c757d;
+            --white: #ffffff;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            --shadow: 0 10px 40px rgba(26, 26, 46, 0.1);
+            --shadow-hover: 0 20px 60px rgba(26, 26, 46, 0.15);
+            --radius: 16px;
+            --radius-sm: 8px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--surface);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(26, 26, 46, 0.05);
+            transition: var(--transition);
+        }
+        header.scrolled { box-shadow: var(--shadow); }
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            top: 8px;
+            left: 8px;
+        }
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: var(--white);
+            border-radius: 50%;
+            bottom: 10px;
+            right: 10px;
+            opacity: 0.8;
+        }
+        .logo-text {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 3px;
+            color: var(--primary);
+        }
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+        nav a:hover::after, nav a.active::after { width: 100%; }
+        nav a:hover { color: var(--accent); }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+        }
+        .btn-primary {
+            background: var(--gradient);
+            color: var(--white);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+        .btn-accent {
+            background: var(--accent);
+            color: var(--white);
+        }
+        .btn-accent:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+        }
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--gradient);
+            padding-top: 80px;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+        .hero-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .hero-shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s ease-in-out infinite;
+        }
+        .hero-shape:nth-child(1) {
+            width: 400px;
+            height: 400px;
+            background: var(--accent);
+            top: -100px;
+            right: -100px;
+        }
+        .hero-shape:nth-child(2) {
+            width: 300px;
+            height: 300px;
+            background: var(--white);
+            bottom: -50px;
+            left: -50px;
+            animation-delay: -5s;
+        }
+        .hero-shape:nth-child(3) {
+            width: 200px;
+            height: 200px;
+            background: var(--accent-light);
+            top: 50%;
+            left: 20%;
+            animation-delay: -10s;
+        }
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(30px, -30px) rotate(5deg); }
+            50% { transform: translate(0, -50px) rotate(0deg); }
+            75% { transform: translate(-30px, -30px) rotate(-5deg); }
+        }
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-content h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            color: var(--white);
+            letter-spacing: 4px;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+        .hero-content h1 span { color: var(--accent); }
+        .hero-content p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            max-width: 500px;
+            line-height: 1.8;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .stat { text-align: center; }
+        .stat-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            color: var(--accent);
+            display: block;
+        }
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero-products {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            transform: perspective(1000px) rotateY(-5deg);
+        }
+        .hero-product-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            animation: slideUp 0.8s ease-out backwards;
+        }
+        .hero-product-card:nth-child(1) { animation-delay: 0.2s; }
+        .hero-product-card:nth-child(2) { animation-delay: 0.4s; }
+        .hero-product-card:nth-child(3) { animation-delay: 0.6s; }
+        .hero-product-card:nth-child(4) { animation-delay: 0.8s; }
+        .hero-product-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        .hero-product-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .hero-product-name { color: var(--white); font-weight: 600; font-size: 1.1rem; }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Sections */
+        section { padding: 6rem 0; }
+        .section-container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-tag {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--white);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            color: var(--primary);
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Brands */
+        .brands {
+            background: var(--white);
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--surface-dark);
+        }
+        .brands-container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+        .brands-label {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+        }
+        .brands-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+        .brand-item {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 3px;
+            color: var(--text-light);
+            opacity: 0.5;
+            transition: var(--transition);
+        }
+        .brand-item:hover { opacity: 1; color: var(--accent); }
+
+        /* Categories */
+        .categories { background: var(--surface); }
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .category-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        .category-card:hover::before { transform: scaleX(1); }
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--surface);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2.5rem;
+            transition: var(--transition);
+        }
+        .category-card:hover .category-icon {
+            background: var(--gradient);
+            transform: scale(1.1);
+        }
+        .category-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .category-count { color: var(--text-light); font-size: 0.9rem; }
+
+        /* Products */
+        .products { background: var(--white); }
+        .products-filter {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--surface-dark);
+            background: var(--white);
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .filter-btn:hover, .filter-btn.active {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .filter-btn.active { background: var(--accent); color: var(--white); }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .product-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid var(--surface-dark);
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        .product-image {
+            position: relative;
+            height: 250px;
+            background: var(--surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .badge-available { background: var(--success); color: var(--white); }
+        .badge-out-of-stock { background: var(--danger); color: var(--white); }
+        .product-brand {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .product-info { padding: 1.5rem; }
+        .product-category {
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .product-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .product-specs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        .spec {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+        .product-actions { display: flex; gap: 0.5rem; }
+        .product-actions .btn {
+            flex: 1;
+            justify-content: center;
+            padding: 0.75rem 1rem;
+            font-size: 0.85rem;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active { display: flex; opacity: 1; }
+        .modal {
+            background: var(--white);
+            border-radius: var(--radius);
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            z-index: 10;
+        }
+        .modal-close:hover { background: var(--accent); color: var(--white); }
+        .modal-content { display: grid; grid-template-columns: 1fr 1fr; }
+        .modal-gallery {
+            background: var(--surface);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-main-image {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-details { padding: 2rem; }
+        .modal-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        .modal-brand {
+            font-size: 0.9rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .modal-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        .modal-description {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        .modal-specs { margin-bottom: 2rem; }
+        .modal-specs h4 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        .specs-list { display: grid; gap: 0.75rem; }
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem;
+            background: var(--surface);
+            border-radius: var(--radius-sm);
+        }
+        .spec-item span:first-child { color: var(--text-light); }
+        .spec-item span:last-child { font-weight: 600; color: var(--primary); }
+        .modal-actions { display: flex; gap: 1rem; }
+        .modal-actions .btn { flex: 1; justify-content: center; }
+
+        /* About */
+        .about { background: var(--surface); }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .about-image { position: relative; }
+        .about-image-main {
+            width: 100%;
+            height: 500px;
+            background: var(--gradient);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .about-image-main::before { content: '🏭'; font-size: 8rem; opacity: 0.3; }
+        .about-image-badge {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 150px;
+            height: 150px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            box-shadow: var(--shadow);
+        }
+        .about-image-badge .number { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; }
+        .about-image-badge .text { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+        .about-content h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        .about-content p { color: var(--text-light); margin-bottom: 1.5rem; line-height: 1.8; }
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .about-feature { display: flex; align-items: center; gap: 1rem; }
+        .about-feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+        .about-feature-text { font-weight: 600; color: var(--primary); }
+
+        /* Contact */
+        .contact { background: var(--white); }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+        }
+        .contact-info {
+            background: var(--gradient);
+            border-radius: var(--radius);
+            padding: 3rem;
+            color: var(--white);
+        }
+        .contact-info h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+        .contact-info p { opacity: 0.8; margin-bottom: 2rem; line-height: 1.8; }
+        .contact-item { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.5rem; }
+        .contact-item-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .contact-item-content h4 { font-weight: 600; margin-bottom: 0.25rem; }
+        .contact-item-content span { opacity: 0.8; font-size: 0.95rem; }
+        .contact-hours {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .contact-hours h4 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+        .hours-list { display: flex; flex-direction: column; gap: 0.5rem; }
+        .hours-item { display: flex; justify-content: space-between; font-size: 0.95rem; }
+        .hours-item span:first-child { opacity: 0.8; }
+        .contact-form-container {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 3rem;
+        }
+        .contact-form-container h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; font-weight: 500; margin-bottom: 0.5rem; color: var(--primary); }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--surface-dark);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--white);
+        }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        .form-group textarea { resize: vertical; min-height: 150px; }
+        .form-submit { width: 100%; padding: 1rem; font-size: 1rem; }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            padding: 4rem 0 2rem;
+        }
+        .footer-container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        .footer-brand .logo { margin-bottom: 1rem; }
+        .footer-brand .logo-text { color: var(--white); }
+        .footer-brand p { opacity: 0.7; line-height: 1.8; margin-bottom: 1.5rem; }
+        .footer-social { display: flex; gap: 1rem; }
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .social-link:hover { background: var(--accent); }
+        .footer-column h4 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+        }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.75rem; }
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .footer-links a:hover { color: var(--accent); }
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .footer-bottom p { opacity: 0.7; font-size: 0.9rem; }
+
+        /* Admin */
+        .admin-login-page {
+            display: none;
+            min-height: 100vh;
+            background: var(--gradient);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .admin-login-page.active { display: flex; }
+        .login-container {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 3rem;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: var(--shadow-hover);
+        }
+        .login-header { text-align: center; margin-bottom: 2rem; }
+        .login-header .logo { justify-content: center; margin-bottom: 1.5rem; }
+        .login-header h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            color: var(--primary);
+        }
+        .login-header p { color: var(--text-light); font-size: 0.9rem; margin-top: 0.5rem; }
+        .login-error {
+            background: #fee2e2;
+            color: var(--danger);
+            padding: 1rem;
+            border-radius: var(--radius-sm);
+            margin-bottom: 1rem;
+            display: none;
+            text-align: center;
+        }
+        .login-error.show { display: block; }
+        .login-demo-info {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 1rem;
+            border-radius: var(--radius-sm);
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+        .login-demo-info strong { display: block; margin-bottom: 0.5rem; }
+        .admin-dashboard { display: none; min-height: 100vh; background: var(--surface); }
+        .admin-dashboard.active { display: block; }
+        .admin-header {
+            background: var(--white);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .admin-header .logo-text { font-size: 1.5rem; }
+        .admin-user { display: flex; align-items: center; gap: 1rem; }
+        .admin-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 600;
+        }
+        .admin-layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            min-height: calc(100vh - 72px);
+        }
+        .admin-sidebar {
+            background: var(--white);
+            padding: 2rem 0;
+            border-right: 1px solid var(--surface-dark);
+        }
+        .admin-nav { list-style: none; }
+        .admin-nav-item {
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-light);
+            border-left: 3px solid transparent;
+        }
+        .admin-nav-item:hover { background: var(--surface); color: var(--primary); }
+        .admin-nav-item.active {
+            background: var(--surface);
+            color: var(--accent);
+            border-left-color: var(--accent);
+        }
+        .admin-nav-item span { font-size: 1.2rem; }
+        .admin-main { padding: 2rem; overflow-y: auto; }
+        .admin-page { display: none; }
+        .admin-page.active { display: block; }
+        .admin-page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .admin-page-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            color: var(--primary);
+        }
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+        .stat-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        .stat-card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        .stat-card-icon.blue { background: #dbeafe; }
+        .stat-card-icon.green { background: #dcfce7; }
+        .stat-card-icon.yellow { background: #fef3c7; }
+        .stat-card-icon.purple { background: #f3e8ff; }
+        .stat-card-value {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+        }
+        .stat-card-label { color: var(--text-light); font-size: 0.9rem; }
+        .admin-table-container {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        .admin-table-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--surface-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .admin-table-header h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            color: var(--primary);
+        }
+        .admin-search {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--surface);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+        }
+        .admin-search input { border: none; background: none; outline: none; font-family: inherit; width: 200px; }
+        .admin-table { width: 100%; border-collapse: collapse; }
+        .admin-table th, .admin-table td { padding: 1rem 1.5rem; text-align: left; }
+        .admin-table th {
+            background: var(--surface);
+            font-weight: 600;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .admin-table tr { border-bottom: 1px solid var(--surface-dark); }
+        .admin-table tr:hover { background: var(--surface); }
+        .admin-table-image {
+            width: 60px;
+            height: 60px;
+            background: var(--surface);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        .admin-table-actions { display: flex; gap: 0.5rem; }
+        .admin-table-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: var(--radius-sm);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        .admin-table-btn.edit { background: #dbeafe; color: #2563eb; }
+        .admin-table-btn.delete { background: #fee2e2; color: var(--danger); }
+        .admin-table-btn:hover { transform: scale(1.1); }
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .status-available { background: #dcfce7; color: #16a34a; }
+        .status-out-of-stock { background: #fee2e2; color: #dc2626; }
+        .status-unread { background: #dbeafe; color: #2563eb; }
+        .status-read { background: var(--surface); color: var(--text-light); }
+        .admin-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .admin-modal.active { display: flex; }
+        .admin-modal-content {
+            background: var(--white);
+            border-radius: var(--radius);
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .admin-modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--surface-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .admin-modal-header h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            color: var(--primary);
+        }
+        .admin-modal-body { padding: 1.5rem; }
+        .admin-modal-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--surface-dark);
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+        .message-detail { padding: 2rem; }
+        .message-detail-header { margin-bottom: 2rem; }
+        .message-detail-header h4 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .message-detail-meta {
+            display: flex;
+            gap: 2rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        .message-detail-body {
+            background: var(--surface);
+            padding: 1.5rem;
+            border-radius: var(--radius-sm);
+            line-height: 1.8;
+        }
+        .main-site { display: block; }
+        .main-site.hidden { display: none; }
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-hover);
+            z-index: 5000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: var(--transition);
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast.success { background: var(--success); }
+        .toast.error { background: var(--danger); }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .admin-stats { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 992px) {
+            .hero-container { grid-template-columns: 1fr; text-align: center; }
+            .hero-content p { margin: 0 auto 2rem; }
+            .hero-buttons { justify-content: center; }
+            .hero-stats { justify-content: center; }
+            .hero-products { transform: none; }
+            .about-grid, .contact-grid { grid-template-columns: 1fr; }
+            .about-image-badge { right: 20px; bottom: -20px; }
+            .modal-content { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+            .admin-layout { grid-template-columns: 1fr; }
+            .admin-sidebar { display: none; }
+        }
+        @media (max-width: 768px) {
+            .header-container { height: 70px; }
+            nav {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                pointer-events: none;
+                transition: var(--transition);
+            }
+            nav.active {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: all;
+                box-shadow: var(--shadow);
+            }
+            .mobile-menu-btn { display: flex; }
+            .hero-stats { flex-wrap: wrap; gap: 2rem; }
+            .hero-products { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .admin-stats { grid-template-columns: 1fr; }
+            .admin-table-container { overflow-x: auto; }
+        }
+    </style>
+</head>
+<body>
+    <div class="toast" id="toast"></div>
+    <div class="main-site" id="mainSite">
+        <header id="header">
+            <div class="header-container">
+                <a href="#" class="logo" onclick="showSection('hero')">
+                    <div class="logo-icon"></div>
+                    <span class="logo-text">INTERPLAST</span>
+                </a>
+                <nav id="nav">
+                    <a href="#" class="active" onclick="showSection('hero')">Inicio</a>
+                    <a href="#" onclick="showSection('products')">Productos</a>
+                    <a href="#" onclick="showSection('about')">Nosotros</a>
+                    <a href="#" onclick="showSection('contact')">Contacto</a>
+                    <a href="#" class="btn btn-primary" onclick="showAdminLogin()">
+                        <span>🔐</span> Admin
+                    </a>
+                </nav>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </header>
+
+        <section class="hero" id="hero">
+            <div class="hero-shapes">
+                <div class="hero-shape"></div>
+                <div class="hero-shape"></div>
+                <div class="hero-shape"></div>
+            </div>
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1>PRODUCTOS<br>PLÁSTICOS<br><span>AL POR MAYOR</span></h1>
+                    <p>Somos distribuidores mayoristas de productos plásticos de alta calidad. Baldes, tachos, vasos, tinas y más de las mejores marcas del mercado.</p>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn btn-accent" onclick="showSection('products')">Ver Catálogo</a>
+                        <a href="#" class="btn btn-outline" style="border-color: white; color: white;" onclick="showSection('contact')">Solicitar Cotización</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat"><span class="stat-number">15+</span><span class="stat-label">Años de experiencia</span></div>
+                        <div class="stat"><span class="stat-number">500+</span><span class="stat-label">Clientes satisfechos</span></div>
+                        <div class="stat"><span class="stat-number">50+</span><span class="stat-label">Productos</span></div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-products">
+                        <div class="hero-product-card"><div class="hero-product-icon">🪣</div><div class="hero-product-name">Baldes</div></div>
+                        <div class="hero-product-card"><div class="hero-product-icon">🛢️</div><div class="hero-product-name">Tachos</div></div>
+                        <div class="hero-product-card"><div class="hero-product-icon">🥤</div><div class="hero-product-name">Vasos</div></div>
+                        <div class="hero-product-card"><div class="hero-product-icon">🛁</div><div class="hero-product-name">Tinas</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="brands">
+            <div class="brands-container">
+                <p class="brands-label">Trabajamos con las mejores marcas</p>
+                <div class="brands-grid">
+                    <div class="brand-item">DUKE</div>
+                    <div class="brand-item">MAGINZA</div>
+                    <div class="brand-item">URPI</div>
+                    <div class="brand-item">KOSMO</div>
+                    <div class="brand-item">REY</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="categories" id="categories">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-tag">Categorías</span>
+                    <h2 class="section-title">NUESTRAS LÍNEAS DE PRODUCTOS</h2>
+                    <p class="section-subtitle">Explora nuestra amplia variedad de productos plásticos para todas las necesidades.</p>
+                </div>
+                <div class="categories-grid">
+                    <div class="category-card" onclick="filterProducts('baldes')"><div class="category-icon"><span>🪣</span></div><h3 class="category-name">BALDES</h3><p class="category-count">8 productos</p></div>
+                    <div class="category-card" onclick="filterProducts('tachos')"><div class="category-icon"><span>🛢️</span></div><h3 class="category-name">TACHOS</h3><p class="category-count">6 productos</p></div>
+                    <div class="category-card" onclick="filterProducts('vasos')"><div class="category-icon"><span>🥤</span></div><h3 class="category-name">VASOS</h3><p class="category-count">10 productos</p></div>
+                    <div class="category-card" onclick="filterProducts('tinas')"><div class="category-icon"><span>🛁</span></div><h3 class="category-name">TINAS</h3><p class="category-count">5 productos</p></div>
+                    <div class="category-card" onclick="filterProducts('tapas')"><div class="category-icon"><span>⭕</span></div><h3 class="category-name">TAPAS</h3><p class="category-count">12 productos</p></div>
+                    <div class="category-card" onclick="filterProducts('otros')"><div class="category-icon"><span>📦</span></div><h3 class="category-name">OTROS</h3><p class="category-count">15 productos</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="products" id="products">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-tag">Catálogo</span>
+                    <h2 class="section-title">PRODUCTOS DESTACADOS</h2>
+                    <p class="section-subtitle">Productos de alta calidad para satisfacer todas tus necesidades.</p>
+                </div>
+                <div class="products-filter">
+                    <button class="filter-btn active" onclick="filterProducts('all')">Todos</button>
+                    <button class="filter-btn" onclick="filterProducts('baldes')">Baldes</button>
+                    <button class="filter-btn" onclick="filterProducts('tachos')">Tachos</button>
+                    <button class="filter-btn" onclick="filterProducts('vasos')">Vasos</button>
+                    <button class="filter-btn" onclick="filterProducts('tinas')">Tinas</button>
+                    <button class="filter-btn" onclick="filterProducts('tapas')">Tapas</button>
+                </div>
+                <div class="products-grid" id="productsGrid"></div>
+            </div>
+        </section>
+
+        <section class="about" id="about">
+            <div class="section-container">
+                <div class="about-grid">
+                    <div class="about-image">
+                        <div class="about-image-main"></div>
+                        <div class="about-image-badge"><span class="number">15+</span><span class="text">Años</span></div>
+                    </div>
+                    <div class="about-content">
+                        <span class="section-tag">Sobre Nosotros</span>
+                        <h3>INTERPLAST: LÍDERES EN DISTRIBUCIÓN DE PRODUCTOS PLÁSTICOS</h3>
+                        <p>Somos una empresa peruana dedicada a la venta al por mayor de productos plásticos de alta calidad. Con más de 15 años de experiencia en el mercado.</p>
+                        <p>Trabajamos con las mejores marcas del mercado como Duke, Maginza, Urpi, Kosmo y otras más.</p>
+                        <h4 style="font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; margin: 2rem 0 1rem;">MISIÓN</h4>
+                        <p>Proveer productos plásticos de alta calidad a precios competitivos.</p>
+                        <h4 style="font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; margin: 2rem 0 1rem;">VISIÓN</h4>
+                        <p>Ser el distribuidor mayorista de productos plásticos líder a nivel nacional.</p>
+                        <div class="about-features">
+                            <div class="about-feature"><div class="about-feature-icon">✓</div><span class="about-feature-text">Calidad Garantizada</span></div>
+                            <div class="about-feature"><div class="about-feature-icon">🚚</div><span class="about-feature-text">Envíos a Todo el País</span></div>
+                            <div class="about-feature"><div class="about-feature-icon">💰</div><span class="about-feature-text">Precios Mayoristas</span></div>
+                            <div class="about-feature"><div class="about-feature-icon">🤝</div><span class="about-feature-text">Atención Personalizada</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact" id="contact">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-tag">Contacto</span>
+                    <h2 class="section-title">SOLICITA TU COTIZACIÓN</h2>
+                    <p class="section-subtitle">Estamos para ayudarte. Contáctanos.</p>
+                </div>
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3>INFORMACIÓN DE CONTACTO</h3>
+                        <p>Visítanos en nuestro local o comunícate con nosotros.</p>
+                        <div class="contact-item"><div class="contact-item-icon">📍</div><div class="contact-item-content"><h4>Dirección</h4><span>Av. Industrial 1234, Lima, Perú</span></div></div>
+                        <div class="contact-item"><div class="contact-item-icon">📞</div><div class="contact-item-content"><h4>Teléfono</h4><span>+51 1 234 5678</span></div></div>
+                        <div class="contact-item"><div class="contact-item-icon">📱</div><div class="contact-item-content"><h4>WhatsApp</h4><span>+51 999 888 777</span></div></div>
+                        <div class="contact-item"><div class="contact-item-icon">✉️</div><div class="contact-item-content"><h4>Correo</h4><span>ventas@interplast.pe</span></div></div>
+                        <div class="contact-hours">
+                            <h4>HORARIO DE ATENCIÓN</h4>
+                            <div class="hours-list">
+                                <div class="hours-item"><span>Lunes - Viernes</span><span>8:00 AM - 6:00 PM</span></div>
+                                <div class="hours-item"><span>Sábados</span><span>8:00 AM - 1:00 PM</span></div>
+                                <div class="hours-item"><span>Domingos</span><span>Cerrado</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-form-container">
+                        <h3>ENVÍANOS UN MENSAJE</h3>
+                        <form id="contactForm" onsubmit="submitContactForm(event)">
+                            <div class="form-row">
+                                <div class="form-group"><label for="contactName">Nombre Completo *</label><input type="text" id="contactName" name="name" required></div>
+                                <div class="form-group"><label for="contactCompany">Empresa (Opcional)</label><input type="text" id="contactCompany" name="company"></div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group"><label for="contactPhone">Teléfono *</label><input type="tel" id="contactPhone" name="phone" required></div>
+                                <div class="form-group"><label for="contactEmail">Correo *</label><input type="email" id="contactEmail" name="email" required></div>
+                            </div>
+                            <div class="form-group"><label for="contactMessage">Mensaje *</label><textarea id="contactMessage" name="message" placeholder="Escribe tu consulta o solicitud de cotización..." required></textarea></div>
+                            <button type="submit" class="btn btn-accent form-submit">Enviar Mensaje</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-container">
+                <div class="footer-grid">
+                    <div class="footer-brand">
+                        <a href="#" class="logo"><div class="logo-icon"></div><span class="logo-text">INTERPLAST</span></a>
+                        <p>Distribuidores mayoristas de productos plásticos de alta calidad.</p>
+                        <div class="footer-social">
+                            <a href="#" class="social-link">📘</a>
+                            <a href="#" class="social-link">📸</a>
+                            <a href="#" class="social-link">🔗</a>
+                        </div>
+                    </div>
+                    <div class="footer-column">
+                        <h4>ENLACES</h4>
+                        <ul class="footer-links">
+                            <li><a href="#" onclick="showSection('hero')">Inicio</a></li>
+                            <li><a href="#" onclick="showSection('products')">Productos</a></li>
+                            <li><a href="#" onclick="showSection('about')">Nosotros</a></li>
+                            <li><a href="#" onclick="showSection('contact')">Contacto</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>CATEGORÍAS</h4>
+                        <ul class="footer-links">
+                            <li><a href="#" onclick="filterProducts('baldes')">Baldes</a></li>
+                            <li><a href="#" onclick="filterProducts('tachos')">Tachos</a></li>
+                            <li><a href="#" onclick="filterProducts('vasos')">Vasos</a></li>
+                            <li><a href="#" onclick="filterProducts('tinas')">Tinas</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>CONTACTO</h4>
+                        <ul class="footer-links">
+                            <li>📍 Av. Industrial 1234, Lima</li>
+                            <li>📞 +51 1 234 5678</li>
+                            <li>📱 +51 999 888 777</li>
+                            <li>✉️ ventas@interplast.pe</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>© 2024 Interplast. Todos los derechos reservados.</p>
+                    <p>Desarrollado con ❤️ para el sector industrial</p>
+                </div>
+            </div>
+        </footer>
+
+        <div class="modal-overlay" id="productModal">
+            <div class="modal">
+                <button class="modal-close" onclick="closeProductModal()">×</button>
+                <div class="modal-content">
+                    <div class="modal-gallery"><div class="modal-main-image" id="modalMainImage"></div></div>
+                    <div class="modal-details">
+                        <span class="modal-badge badge-available" id="modalBadge">Disponible</span>
+                        <p class="modal-brand" id="modalBrand">DUKE</p>
+                        <h2 class="modal-title" id="modalTitle">Balde Industrial 20L</h2>
+                        <p class="modal-description" id="modalDescription"></p>
+                        <div class="modal-specs"><h4>ESPECIFICACIONES</h4><div class="specs-list" id="modalSpecs"></div></div>
+                        <div class="modal-actions">
+                            <a href="#" class="btn btn-accent" onclick="requestQuote()">Solicitar Cotización</a>
+                            <a href="#" class="btn btn-outline" onclick="closeProductModal(); showSection('contact');">Contactar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-login-page" id="adminLogin">
+        <div class="login-container">
+            <div class="login-header">
+                <a href="#" class="logo" onclick="showMainSite()"><div class="logo-icon"></div><span class="logo-text">INTERPLAST</span></a>
+                <h2>PANEL DE ADMINISTRACIÓN</h2>
+                <p>Ingresa tus credenciales para continuar</p>
+            </div>
+            <div class="login-demo-info"><strong>🔑 Credenciales de Demo:</strong>Usuario: <strong>admin</strong><br>Contraseña: <strong>demo123</strong></div>
+            <div class="login-error" id="loginError">Usuario o contraseña incorrectos</div>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group"><label for="username">Usuario</label><input type="text" id="username" name="username" required></div>
+                <div class="form-group"><label for="password">Contraseña</label><input type="password" id="password" name="password" required></div>
+                <button type="submit" class="btn btn-accent form-submit">Iniciar Sesión</button>
+            </form>
+            <p style="text-align: center; margin-top: 1.5rem; color: var(--text-light);"><a href="#" onclick="showMainSite()" style="color: var(--accent);">← Volver al sitio</a></p>
+        </div>
+    </div>
+
+    <div class="admin-dashboard" id="adminDashboard">
+        <div class="admin-header">
+            <div class="logo"><div class="logo-icon"></div><span class="logo-text">INTERPLAST</span><span style="margin-left: 1rem; padding: 0.3rem 0.8rem; background: var(--accent); color: white; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">ADMIN</span></div>
+            <div class="admin-user"><span style="color: var(--text-light);">Bienvenido, Admin</span><div class="admin-avatar">A</div><button class="btn btn-outline" onclick="handleLogout()" style="padding: 0.5rem 1rem;">Salir</button></div>
+        </div>
+        <div class="admin-layout">
+            <aside class="admin-sidebar">
+                <ul class="admin-nav">
+                    <li class="admin-nav-item active" onclick="showAdminPage('dashboard')"><span>📊</span> Dashboard</li>
+                    <li class="admin-nav-item" onclick="showAdminPage('products')"><span>📦</span> Productos</li>
+                    <li class="admin-nav-item" onclick="showAdminPage('categories')"><span>📁</span> Categorías</li>
+                    <li class="admin-nav-item" onclick="showAdminPage('brands')"><span>🏷️</span> Marcas</li>
+                    <li class="admin-nav-item" onclick="showAdminPage('messages')"><span>✉️</span> Mensajes<span style="margin-left: auto; background: var(--accent); color: white; padding: 0.2rem 0.5rem; border-radius: 50px; font-size: 0.75rem;" id="unreadCount">3</span></li>
+                </ul>
+                <div style="padding: 2rem; margin-top: auto;"><a href="#" onclick="showMainSite()" style="color: var(--text-light); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;"><span>🌐</span> Ver Sitio Web</a></div>
+            </aside>
+            <main class="admin-main">
+                <div class="admin-page active" id="adminPageDashboard">
+                    <div class="admin-page-header"><h1 class="admin-page-title">DASHBOARD</h1></div>
+                    <div class="admin-stats">
+                        <div class="stat-card"><div class="stat-card-header"><div><div class="stat-card-value" id="statProducts">12</div><div class="stat-card-label">Productos</div></div><div class="stat-card-icon blue">📦</div></div></div>
+                        <div class="stat-card"><div class="stat-card-header"><div><div class="stat-card-value" id="statCategories">6</div><div class="stat-card-label">Categorías</div></div><div class="stat-card-icon green">📁</div></div></div>
+                        <div class="stat-card"><div class="stat-card-header"><div><div class="stat-card-value" id="statBrands">5</div><div class="stat-card-label">Marcas</div></div><div class="stat-card-icon yellow">🏷️</div></div></div>
+                        <div class="stat-card"><div class="stat-card-header"><div><div class="stat-card-value" id="statMessages">3</div><div class="stat-card-label">Mensajes nuevos</div></div><div class="stat-card-icon purple">✉️</div></div></div>
+                    </div>
+                    <div class="admin-table-container">
+                        <div class="admin-table-header"><h3>ÚLTIMOS MENSAJES</h3><a href="#" class="btn btn-outline" onclick="showAdminPage('messages')" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Ver todos</a></div>
+                        <table class="admin-table"><thead><tr><th>Nombre</th><th>Email</th><th>Mensaje</th><th>Fecha</th><th>Estado</th></tr></thead><tbody id="dashboardMessagesTable"></tbody></table>
+                    </div>
+                </div>
+                <div class="admin-page" id="adminPageProducts">
+                    <div class="admin-page-header"><h1 class="admin-page-title">PRODUCTOS</h1><button class="btn btn-accent" onclick="openProductModal()">+ Nuevo Producto</button></div>
+                    <div class="admin-table-container">
+                        <div class="admin-table-header"><h3>LISTA DE PRODUCTOS</h3><div class="admin-search"><span>🔍</span><input type="text" placeholder="Buscar producto..." id="productSearch" oninput="searchProducts()"></div></div>
+                        <table class="admin-table"><thead><tr><th>Imagen</th><th>Nombre</th><th>Categoría</th><th>Marca</th><th>Capacidad</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="productsTable"></tbody></table>
+                    </div>
+                </div>
+                <div class="admin-page" id="adminPageCategories">
+                    <div class="admin-page-header"><h1 class="admin-page-title">CATEGORÍAS</h1><button class="btn btn-accent" onclick="openCategoryModal()">+ Nueva Categoría</button></div>
+                    <div class="admin-table-container">
+                        <div class="admin-table-header"><h3>LISTA DE CATEGORÍAS</h3></div>
+                        <table class="admin-table"><thead><tr><th>Icono</th><th>Nombre</th><th>Productos</th><th>Acciones</th></tr></thead><tbody id="categoriesTable"></tbody></table>
+                    </div>
+                </div>
+                <div class="admin-page" id="adminPageBrands">
+                    <div class="admin-page-header"><h1 class="admin-page-title">MARCAS</h1><button class="btn btn-accent" onclick="openBrandModal()">+ Nueva Marca</button></div>
+                    <div class="admin-table-container">
+                        <div class="admin-table-header"><h3>LISTA DE MARCAS</h3></div>
+                        <table class="admin-table"><thead><tr><th>Nombre</th><th>Productos</th><th>Acciones</th></tr></thead><tbody id="brandsTable"></tbody></table>
+                    </div>
+                </div>
+                <div class="admin-page" id="adminPageMessages">
+                    <div class="admin-page-header"><h1 class="admin-page-title">MENSAJES</h1></div>
+                    <div class="admin-table-container">
+                        <div class="admin-table-header"><h3>MENSAJES RECIBIDOS</h3></div>
+                        <table class="admin-table"><thead><tr><th>Nombre</th><th>Empresa</th><th>Email</th><th>Teléfono</th><th>Fecha</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="messagesTable"></tbody></table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div class="admin-modal" id="adminProductModal">
+        <div class="admin-modal-content">
+            <div class="admin-modal-header"><h3 id="productModalTitle">Nuevo Producto</h3><button class="modal-close" onclick="closeAdminProductModal()">×</button></div>
+            <div class="admin-modal-body">
+                <form id="productForm">
+                    <input type="hidden" id="productId">
+                    <div class="form-row"><div class="form-group"><label for="productName">Nombre *</label><input type="text" id="productName" required></div><div class="form-group"><label for="productBrand">Marca *</label><select id="productBrand" required></select></div></div>
+                    <div class="form-row"><div class="form-group"><label for="productCategory">Categoría *</label><select id="productCategory" required></select></div><div class="form-group"><label for="productCapacity">Capacidad</label><input type="text" id="productCapacity" placeholder="Ej: 20 litros"></div></div>
+                    <div class="form-row"><div class="form-group"><label for="productMaterial">Material</label><input type="text" id="productMaterial" placeholder="Ej: Polietileno"></div><div class="form-group"><label for="productStatus">Estado *</label><select id="productStatus" required><option value="available">Disponible</option><option value="out_of_stock">Sin Stock</option></select></div></div>
+                    <div class="form-group"><label for="productDescription">Descripción</label><textarea id="productDescription" placeholder="Descripción del producto..."></textarea></div>
+                </form>
+            </div>
+            <div class="admin-modal-footer"><button class="btn btn-outline" onclick="closeAdminProductModal()">Cancelar</button><button class="btn btn-accent" onclick="saveProduct()">Guardar</button></div>
+        </div>
+    </div>
+
+    <div class="admin-modal" id="adminCategoryModal">
+        <div class="admin-modal-content" style="max-width: 450px;">
+            <div class="admin-modal-header"><h3 id="categoryModalTitle">Nueva Categoría</h3><button class="modal-close" onclick="closeAdminCategoryModal()">×</button></div>
+            <div class="admin-modal-body"><form id="categoryForm"><input type="hidden" id="categoryId"><div class="form-group"><label for="categoryName">Nombre *</label><input type="text" id="categoryName" required></div><div class="form-group"><label for="categoryIcon">Icono (Emoji)</label><input type="text" id="categoryIcon" placeholder="🪣"></div></form></div>
+            <div class="admin-modal-footer"><button class="btn btn-outline" onclick="closeAdminCategoryModal()">Cancelar</button><button class="btn btn-accent" onclick="saveCategory()">Guardar</button></div>
+        </div>
+    </div>
+
+    <div class="admin-modal" id="adminBrandModal">
+        <div class="admin-modal-content" style="max-width: 450px;">
+            <div class="admin-modal-header"><h3 id="brandModalTitle">Nueva Marca</h3><button class="modal-close" onclick="closeAdminBrandModal()">×</button></div>
+            <div class="admin-modal-body"><form id="brandForm"><input type="hidden" id="brandId"><div class="form-group"><label for="brandName">Nombre *</label><input type="text" id="brandName" required></div></form></div>
+            <div class="admin-modal-footer"><button class="btn btn-outline" onclick="closeAdminBrandModal()">Cancelar</button><button class="btn btn-accent" onclick="saveBrand()">Guardar</button></div>
+        </div>
+    </div>
+
+    <div class="admin-modal" id="messageDetailModal">
+        <div class="admin-modal-content" style="max-width: 600px;">
+            <div class="admin-modal-header"><h3>Detalle del Mensaje</h3><button class="modal-close" onclick="closeMessageDetailModal()">×</button></div>
+            <div class="message-detail" id="messageDetailContent"></div>
+        </div>
+    </div>
+
+    <script>
+        let database = {
+            categories: [
+                { id: 1, name: 'Baldes', icon: '🪣', slug: 'baldes' },
+                { id: 2, name: 'Tachos', icon: '🛢️', slug: 'tachos' },
+                { id: 3, name: 'Vasos', icon: '🥤', slug: 'vasos' },
+                { id: 4, name: 'Tinas', icon: '🛁', slug: 'tinas' },
+                { id: 5, name: 'Tapas', icon: '⭕', slug: 'tapas' },
+                { id: 6, name: 'Otros', icon: '📦', slug: 'otros' }
+            ],
+            brands: [
+                { id: 1, name: 'Duke' },
+                { id: 2, name: 'Maginza' },
+                { id: 3, name: 'Urpi' },
+                { id: 4, name: 'Kosmo' },
+                { id: 5, name: 'Rey' }
+            ],
+            products: [
+                { id: 1, name: 'Balde Industrial 20L', category: 'baldes', brand: 'Duke', capacity: '20 litros', material: 'Polietileno de alta densidad', description: 'Balde industrial de alta resistencia, ideal para uso comercial.', status: 'available', image: '🪣' },
+                { id: 2, name: 'Balde con Tapa 10L', category: 'baldes', brand: 'Maginza', capacity: '10 litros', material: 'Polipropileno', description: 'Balde con tapa incluida para almacenamiento.', status: 'available', image: '🪣' },
+                { id: 3, name: 'Tacho Industrial 100L', category: 'tachos', brand: 'Duke', capacity: '100 litros', material: 'Polietileno de alta densidad', description: 'Tacho de gran capacidad para residuos industriales.', status: 'available', image: '🛢️' },
+                { id: 4, name: 'Tacho con Ruedas 150L', category: 'tachos', brand: 'Kosmo', capacity: '150 litros', material: 'Polietileno reciclado', description: 'Tacho móvil con ruedas de alta resistencia.', status: 'available', image: '🛢️' },
+                { id: 5, name: 'Tacho Hermético 200L', category: 'tachos', brand: 'Duke', capacity: '200 litros', material: 'Polietileno de alta densidad', description: 'Tacho de máxima capacidad con cierre hermético.', status: 'out_of_stock', image: '🛢️' },
+                { id: 6, name: 'Vaso Descartable 7oz', category: 'vasos', brand: 'Urpi', capacity: '7 onzas (200ml)', material: 'Poliestireno', description: 'Vaso descartable económico para bebidas frías.', status: 'available', image: '🥤' },
+                { id: 7, name: 'Vaso Térmico 12oz', category: 'vasos', brand: 'Maginza', capacity: '12 onzas (350ml)', material: 'Poliestireno expandido', description: 'Vaso térmico para bebidas calientes.', status: 'available', image: '🥤' },
+                { id: 8, name: 'Tina Rectangular 50L', category: 'tinas', brand: 'Duke', capacity: '50 litros', material: 'Polipropileno', description: 'Tina rectangular multiusos.', status: 'available', image: '🛁' },
+                { id: 9, name: 'Tina Ovalada 80L', category: 'tinas', brand: 'Kosmo', capacity: '80 litros', material: 'Polietileno', description: 'Tina ovalada de gran capacidad.', status: 'available', image: '🛁' },
+                { id: 10, name: 'Tapa Universal Baldes', category: 'tapas', brand: 'Rey', capacity: 'Universal (10-20L)', material: 'Polipropileno', description: 'Tapa universal compatible con baldes.', status: 'available', image: '⭕' },
+                { id: 11, name: 'Tapa con Aro Metálico', category: 'tapas', brand: 'Duke', capacity: 'Para tachos 100-200L', material: 'Polietileno + acero', description: 'Tapa reforzada con aro metálico.', status: 'available', image: '⭕' },
+                { id: 12, name: 'Contenedor Apilable 30L', category: 'otros', brand: 'Maginza', capacity: '30 litros', material: 'Polipropileno', description: 'Contenedor apilable con tapa.', status: 'available', image: '📦' }
+            ],
+            messages: [
+                { id: 1, name: 'Carlos Mendoza', company: 'Distribuidora del Norte SAC', email: 'carlos.mendoza@delnorte.com', phone: '+51 987 654 321', message: 'Buenos días, estoy interesado en cotizar 500 baldes de 20L marca Duke y 200 tachos de 100L.', date: '2024-01-15 09:30', status: 'unread' },
+                { id: 2, name: 'María García', company: 'Restaurant El Buen Sabor', email: 'maria@elbuensabor.pe', phone: '+51 912 345 678', message: 'Necesito información sobre vasos descartables para mi restaurante.', date: '2024-01-14 14:15', status: 'unread' },
+                { id: 3, name: 'Roberto Sánchez', company: '', email: 'roberto.sanchez@gmail.com', phone: '+51 999 111 222', message: 'Quisiera saber si tienen tinas grandes para uso en lavandería.', date: '2024-01-13 11:45', status: 'unread' }
+            ],
+            users: [{ username: 'admin', password: 'demo123', role: 'admin' }]
+        };
+
+        let currentUser = null;
+        let currentFilter = 'all';
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast ' + type + ' show';
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('es-PE', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+        }
+
+        function showSection(sectionId) {
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+            if (event && event.target) event.target.classList.add('active');
+            if (sectionId === 'hero') window.scrollTo({ top: 0, behavior: 'smooth' });
+            else {
+                const section = document.getElementById(sectionId);
+                if (section) section.scrollIntoView({ behavior: 'smooth' });
+            }
+            document.getElementById('nav').classList.remove('active');
+        }
+
+        function toggleMobileMenu() { document.getElementById('nav').classList.toggle('active'); }
+
+        function renderProducts(filter = 'all') {
+            currentFilter = filter;
+            const grid = document.getElementById('productsGrid');
+            let filteredProducts = database.products;
+            if (filter !== 'all') filteredProducts = database.products.filter(p => p.category === filter);
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase().includes(filter) || (filter === 'all' && btn.textContent === 'Todos')) btn.classList.add('active');
+            });
+            grid.innerHTML = filteredProducts.map(product => '<div class="product-card" onclick="openProductDetail(' + product.id + ')"><div class="product-image"><span class="product-badge ' + (product.status === 'available' ? 'badge-available' : 'badge-out-of-stock') + '">' + (product.status === 'available' ? 'Disponible' : 'Sin Stock') + '</span><span class="product-brand">' + product.brand + '</span><div style="font-size: 5rem;">' + product.image + '</div></div><div class="product-info"><p class="product-category">' + product.category + '</p><h3 class="product-name">' + product.name + '</h3><div class="product-specs"><span class="spec"><span class="spec-icon">📏</span> ' + product.capacity + '</span><span class="spec"><span class="spec-icon">🧪</span> ' + product.material.split(' ')[0] + '</span></div><div class="product-actions"><button class="btn btn-accent" onclick="event.stopPropagation(); openProductDetail(' + product.id + ')">Ver Detalles</button><button class="btn btn-outline" onclick="event.stopPropagation(); requestQuoteFor(' + product.id + ')">Cotizar</button></div></div></div>').join('');
+        }
+
+        function filterProducts(category) {
+            showSection('products');
+            setTimeout(() => renderProducts(category), 500);
+        }
+
+        function openProductDetail(productId) {
+            const product = database.products.find(p => p.id === productId);
+            if (!product) return;
+            document.getElementById('modalBadge').textContent = product.status === 'available' ? 'Disponible' : 'Sin Stock';
+            document.getElementById('modalBadge').className = 'modal-badge ' + (product.status === 'available' ? 'badge-available' : 'badge-out-of-stock');
+            document.getElementById('modalBrand').textContent = product.brand;
+            document.getElementById('modalTitle').textContent = product.name;
+            document.getElementById('modalDescription').textContent = product.description;
+            document.getElementById('modalMainImage').innerHTML = '<div style="font-size: 8rem;">' + product.image + '</div>';
+            document.getElementById('modalSpecs').innerHTML = '<div class="spec-item"><span>Categoría</span><span>' + product.category + '</span></div><div class="spec-item"><span>Marca</span><span>' + product.brand + '</span></div><div class="spec-item"><span>Capacidad</span><span>' + product.capacity + '</span></div><div class="spec-item"><span>Material</span><span>' + product.material + '</span></div><div class="spec-item"><span>Estado</span><span>' + (product.status === 'available' ? 'Disponible' : 'Sin Stock') + '</span></div>';
+            document.getElementById('productModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProductModal() { document.getElementById('productModal').classList.remove('active'); document.body.style.overflow = ''; }
+        function requestQuote() { closeProductModal(); showSection('contact'); }
+        function requestQuoteFor(productId) {
+            const product = database.products.find(p => p.id === productId);
+            if (product) {
+                document.getElementById('contactMessage').value = 'Hola, estoy interesado en: ' + product.name + ' (' + product.brand + ').\\n\\nPor favor, envíenme información.';
+                showSection('contact');
+            }
+        }
+
+        function submitContactForm(event) {
+            event.preventDefault();
+            const newMessage = {
+                id: database.messages.length + 1,
+                name: document.getElementById('contactName').value,
+                company: document.getElementById('contactCompany').value,
+                email: document.getElementById('contactEmail').value,
+                phone: document.getElementById('contactPhone').value,
+                message: document.getElementById('contactMessage').value,
+                date: new Date().toISOString().slice(0, 16).replace('T', ' '),
+                status: 'unread'
+            };
+            database.messages.unshift(newMessage);
+            document.getElementById('contactForm').reset();
+            showToast('¡Mensaje enviado correctamente!');
+            updateStats();
+        }
+
+        function showAdminLogin() { document.getElementById('mainSite').classList.add('hidden'); document.getElementById('adminLogin').classList.add('active'); document.getElementById('adminDashboard').classList.remove('active'); }
+        function showMainSite() { document.getElementById('mainSite').classList.remove('hidden'); document.getElementById('adminLogin').classList.remove('active'); document.getElementById('adminDashboard').classList.remove('active'); }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const user = database.users.find(u => u.username === username && u.password === password);
+            if (user) {
+                currentUser = user;
+                document.getElementById('loginError').classList.remove('show');
+                document.getElementById('adminLogin').classList.remove('active');
+                document.getElementById('adminDashboard').classList.add('active');
+                loadAdminData();
+                showToast('¡Bienvenido al panel de administración!');
+            } else {
+                document.getElementById('loginError').classList.add('show');
+            }
+        }
+
+        function handleLogout() { currentUser = null; showMainSite(); document.getElementById('username').value = ''; document.getElementById('password').value = ''; showToast('Sesión cerrada correctamente'); }
+
+        function showAdminPage(page) {
+            document.querySelectorAll('.admin-nav-item').forEach(item => item.classList.remove('active'));
+            document.querySelectorAll('.admin-page').forEach(p => p.classList.remove('active'));
+            event.target.closest('.admin-nav-item').classList.add('active');
+            document.getElementById('adminPage' + page.charAt(0).toUpperCase() + page.slice(1)).classList.add('active');
+            switch(page) {
+                case 'products': renderAdminProducts(); break;
+                case 'categories': renderAdminCategories(); break;
+                case 'brands': renderAdminBrands(); break;
+                case 'messages': renderAdminMessages(); break;
+            }
+        }
+
+        function loadAdminData() { updateStats(); renderDashboardMessages(); renderAdminProducts(); }
+
+        function updateStats() {
+            const unreadMessages = database.messages.filter(m => m.status === 'unread').length;
+            document.getElementById('statProducts').textContent = database.products.length;
+            document.getElementById('statCategories').textContent = database.categories.length;
+            document.getElementById('statBrands').textContent = database.brands.length;
+            document.getElementById('statMessages').textContent = unreadMessages;
+            document.getElementById('unreadCount').textContent = unreadMessages;
+        }
+
+        function renderDashboardMessages() {
+            const tbody = document.getElementById('dashboardMessagesTable');
+            tbody.innerHTML = database.messages.slice(0, 5).map(msg => '<tr><td>' + msg.name + '</td><td>' + msg.email + '</td><td>' + msg.message.substring(0, 50) + '...</td><td>' + formatDate(msg.date) + '</td><td><span class="status-badge ' + (msg.status === 'unread' ? 'status-unread' : 'status-read') + '">' + (msg.status === 'unread' ? 'Nuevo' : 'Leído') + '</span></td></tr>').join('');
+        }
+
+        function renderAdminProducts() {
+            const tbody = document.getElementById('productsTable');
+            tbody.innerHTML = database.products.map(product => '<tr><td><div class="admin-table-image">' + product.image + '</div></td><td><strong>' + product.name + '</strong></td><td>' + product.category + '</td><td>' + product.brand + '</td><td>' + product.capacity + '</td><td><span class="status-badge ' + (product.status === 'available' ? 'status-available' : 'status-out-of-stock') + '">' + (product.status === 'available' ? 'Disponible' : 'Sin Stock') + '</span></td><td><div class="admin-table-actions"><button class="admin-table-btn edit" onclick="editProduct(' + product.id + ')">✏️</button><button class="admin-table-btn delete" onclick="deleteProduct(' + product.id + ')">🗑️</button></div></td></tr>').join('');
+        }
+
+        function renderAdminCategories() {
+            const tbody = document.getElementById('categoriesTable');
+            tbody.innerHTML = database.categories.map(cat => { const count = database.products.filter(p => p.category === cat.slug).length; return '<tr><td><div class="admin-table-image">' + cat.icon + '</div></td><td><strong>' + cat.name + '</strong></td><td>' + count + ' productos</td><td><div class="admin-table-actions"><button class="admin-table-btn edit" onclick="editCategory(' + cat.id + ')">✏️</button><button class="admin-table-btn delete" onclick="deleteCategory(' + cat.id + ')">🗑️</button></div></td></tr>'; }).join('');
+        }
+
+        function renderAdminBrands() {
+            const tbody = document.getElementById('brandsTable');
+            tbody.innerHTML = database.brands.map(brand => { const count = database.products.filter(p => p.brand === brand.name).length; return '<tr><td><strong>' + brand.name + '</strong></td><td>' + count + ' productos</td><td><div class="admin-table-actions"><button class="admin-table-btn edit" onclick="editBrand(' + brand.id + ')">✏️</button><button class="admin-table-btn delete" onclick="deleteBrand(' + brand.id + ')">🗑️</button></div></td></tr>'; }).join('');
+        }
+
+        function renderAdminMessages() {
+            const tbody = document.getElementById('messagesTable');
+            tbody.innerHTML = database.messages.map(msg => '<tr><td><strong>' + msg.name + '</strong></td><td>' + (msg.company || '-') + '</td><td>' + msg.email + '</td><td>' + msg.phone + '</td><td>' + formatDate(msg.date) + '</td><td><span class="status-badge ' + (msg.status === 'unread' ? 'status-unread' : 'status-read') + '">' + (msg.status === 'unread' ? 'Nuevo' : 'Leído') + '</span></td><td><div class="admin-table-actions"><button class="admin-table-btn edit" onclick="viewMessage(' + msg.id + ')">👁️</button></div></td></tr>').join('');
+        }
+
+        function searchProducts() {
+            const query = document.getElementById('productSearch').value.toLowerCase();
+            const filtered = database.products.filter(p => p.name.toLowerCase().includes(query) || p.brand.toLowerCase().includes(query) || p.category.toLowerCase().includes(query));
+            const tbody = document.getElementById('productsTable');
+            tbody.innerHTML = filtered.map(product => '<tr><td><div class="admin-table-image">' + product.image + '</div></td><td><strong>' + product.name + '</strong></td><td>' + product.category + '</td><td>' + product.brand + '</td><td>' + product.capacity + '</td><td><span class="status-badge ' + (product.status === 'available' ? 'status-available' : 'status-out-of-stock') + '">' + (product.status === 'available' ? 'Disponible' : 'Sin Stock') + '</span></td><td><div class="admin-table-actions"><button class="admin-table-btn edit" onclick="editProduct(' + product.id + ')">✏️</button><button class="admin-table-btn delete" onclick="deleteProduct(' + product.id + ')">🗑️</button></div></td></tr>').join('');
+        }
+
+        function openProductModal(productId = null) {
+            document.getElementById('productModalTitle').textContent = productId ? 'Editar Producto' : 'Nuevo Producto';
+            document.getElementById('productCategory').innerHTML = '<option value="">Seleccionar categoría</option>' + database.categories.map(c => '<option value="' + c.slug + '">' + c.name + '</option>').join('');
+            document.getElementById('productBrand').innerHTML = '<option value="">Seleccionar marca</option>' + database.brands.map(b => '<option value="' + b.name + '">' + b.name + '</option>').join('');
+            if (productId) {
+                const product = database.products.find(p => p.id === productId);
+                if (product) {
+                    document.getElementById('productId').value = product.id;
+                    document.getElementById('productName').value = product.name;
+                    document.getElementById('productCategory').value = product.category;
+                    document.getElementById('productBrand').value = product.brand;
+                    document.getElementById('productCapacity').value = product.capacity;
+                    document.getElementById('productMaterial').value = product.material;
+                    document.getElementById('productStatus').value = product.status;
+                    document.getElementById('productDescription').value = product.description;
+                }
+            } else { document.getElementById('productForm').reset(); document.getElementById('productId').value = ''; }
+            document.getElementById('adminProductModal').classList.add('active');
+        }
+        function closeAdminProductModal() { document.getElementById('adminProductModal').classList.remove('active'); }
+        function editProduct(id) { openProductModal(id); }
+        function getCategoryIcon(category) { const cat = database.categories.find(c => c.slug === category); return cat ? cat.icon : '📦'; }
+
+        function saveProduct() {
+            const id = document.getElementById('productId').value;
+            const productData = { name: document.getElementById('productName').value, category: document.getElementById('productCategory').value, brand: document.getElementById('productBrand').value, capacity: document.getElementById('productCapacity').value, material: document.getElementById('productMaterial').value, status: document.getElementById('productStatus').value, description: document.getElementById('productDescription').value, image: getCategoryIcon(document.getElementById('productCategory').value) };
+            if (id) { const index = database.products.findIndex(p => p.id === parseInt(id)); if (index !== -1) { database.products[index] = Object.assign({}, database.products[index], productData); showToast('Producto actualizado correctamente'); } }
+            else { productData.id = Math.max.apply(null, database.products.map(p => p.id)) + 1; database.products.push(productData); showToast('Producto creado correctamente'); }
+            closeAdminProductModal(); renderAdminProducts(); renderProducts(currentFilter); updateStats();
+        }
+        function deleteProduct(id) { if (confirm('¿Estás seguro de eliminar este producto?')) { database.products = database.products.filter(p => p.id !== id); renderAdminProducts(); renderProducts(currentFilter); updateStats(); showToast('Producto eliminado'); } }
+
+        function openCategoryModal(categoryId = null) {
+            document.getElementById('categoryModalTitle').textContent = categoryId ? 'Editar Categoría' : 'Nueva Categoría';
+            if (categoryId) { const category = database.categories.find(c => c.id === categoryId); if (category) { document.getElementById('categoryId').value = category.id; document.getElementById('categoryName').value = category.name; document.getElementById('categoryIcon').value = category.icon; } }
+            else { document.getElementById('categoryForm').reset(); document.getElementById('categoryId').value = ''; }
+            document.getElementById('adminCategoryModal').classList.add('active');
+        }
+        function closeAdminCategoryModal() { document.getElementById('adminCategoryModal').classList.remove('active'); }
+        function editCategory(id) { openCategoryModal(id); }
+
+        function saveCategory() {
+            const id = document.getElementById('categoryId').value;
+            const categoryData = { name: document.getElementById('categoryName').value, icon: document.getElementById('categoryIcon').value || '📦', slug: document.getElementById('categoryName').value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") };
+            if (id) { const index = database.categories.findIndex(c => c.id === parseInt(id)); if (index !== -1) { database.categories[index] = Object.assign({}, database.categories[index], categoryData); showToast('Categoría actualizada'); } }
+            else { categoryData.id = Math.max.apply(null, database.categories.map(c => c.id)) + 1; database.categories.push(categoryData); showToast('Categoría creada'); }
+            closeAdminCategoryModal(); renderAdminCategories(); updateStats();
+        }
+        function deleteCategory(id) { if (confirm('¿Estás seguro de eliminar esta categoría?')) { database.categories = database.categories.filter(c => c.id !== id); renderAdminCategories(); updateStats(); showToast('Categoría eliminada'); } }
+
+        function openBrandModal(brandId = null) {
+            document.getElementById('brandModalTitle').textContent = brandId ? 'Editar Marca' : 'Nueva Marca';
+            if (brandId) { const brand = database.brands.find(b => b.id === brandId); if (brand) { document.getElementById('brandId').value = brand.id; document.getElementById('brandName').value = brand.name; } }
+            else { document.getElementById('brandForm').reset(); document.getElementById('brandId').value = ''; }
+            document.getElementById('adminBrandModal').classList.add('active');
+        }
+        function closeAdminBrandModal() { document.getElementById('adminBrandModal').classList.remove('active'); }
+        function editBrand(id) { openBrandModal(id); }
+
+        function saveBrand() {
+            const id = document.getElementById('brandId').value;
+            const brandData = { name: document.getElementById('brandName').value };
+            if (id) { const index = database.brands.findIndex(b => b.id === parseInt(id)); if (index !== -1) { database.brands[index] = Object.assign({}, database.brands[index], brandData); showToast('Marca actualizada'); } }
+            else { brandData.id = Math.max.apply(null, database.brands.map(b => b.id)) + 1; database.brands.push(brandData); showToast('Marca creada'); }
+            closeAdminBrandModal(); renderAdminBrands(); updateStats();
+        }
+        function deleteBrand(id) { if (confirm('¿Estás seguro de eliminar esta marca?')) { database.brands = database.brands.filter(b => b.id !== id); renderAdminBrands(); updateStats(); showToast('Marca eliminada'); } }
+
+        function viewMessage(id) {
+            const message = database.messages.find(m => m.id === id);
+            if (!message) return;
+            message.status = 'read';
+            updateStats(); renderAdminMessages(); renderDashboardMessages();
+            document.getElementById('messageDetailContent').innerHTML = '<div class="message-detail-header"><h4>' + message.name + '</h4><div class="message-detail-meta"><span>📧 ' + message.email + '</span><span>📞 ' + message.phone + '</span>' + (message.company ? '<span>🏢 ' + message.company + '</span>' : '') + '</div><p style="color: var(--text-light); font-size: 0.9rem; margin-top: 0.5rem;">Recibido: ' + formatDate(message.date) + '</p></div><div class="message-detail-body">' + message.message + '</div>';
+            document.getElementById('messageDetailModal').classList.add('active');
+        }
+        function closeMessageDetailModal() { document.getElementById('messageDetailModal').classList.remove('active'); }
+
+        window.addEventListener('scroll', () => { const header = document.getElementById('header'); if (window.scrollY > 50) header.classList.add('scrolled'); else header.classList.remove('scrolled'); });
+        document.addEventListener('click', (e) => { if (e.target.classList.contains('modal-overlay')) closeProductModal(); if (e.target.classList.contains('admin-modal')) { closeAdminProductModal(); closeAdminCategoryModal(); closeAdminBrandModal(); closeMessageDetailModal(); } });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeProductModal(); closeAdminProductModal(); closeAdminCategoryModal(); closeAdminBrandModal(); closeMessageDetailModal(); } });
+        document.addEventListener('DOMContentLoaded', () => { renderProducts(); });
+    </script>
+</body>
+</html>

@@ -155,7 +155,9 @@
         .modal-desc{color:var(--text-light);font-size:0.85rem;margin-bottom:1rem;line-height:1.5}
         .specs-list{display:grid;gap:0.4rem;margin-bottom:1rem}
         .spec-row{display:flex;justify-content:space-between;padding:0.4rem;background:var(--surface);border-radius:4px;font-size:0.8rem}
-        .spec-row span:last-child{font-weight:600}
+        .spec-row span:first-child{font-weight:500;color:var(--text-light)}
+        .spec-row span:last-child{font-weight:600;color:var(--primary)}
+        .spec-section-title{font-family:'Bebas Neue',sans-serif;font-size:0.95rem;color:var(--accent);margin-top:0.75rem;margin-bottom:0.5rem;padding:0.3rem 0.5rem;background:rgba(233,69,96,0.1);border-left:3px solid var(--accent);border-radius:4px;letter-spacing:0.5px}
         .modal-btns{display:flex;gap:0.5rem}
         .modal-btns .btn{flex:1;justify-content:center}
 
@@ -218,14 +220,24 @@
         .login-error.show{display:block}
         .admin-dash{display:none;min-height:100vh;background:var(--surface)}
         .admin-dash.active{display:block}
-        .admin-header{background:#fff;padding:0.5rem 1rem;display:flex;justify-content:space-between;align-items:center;box-shadow:var(--shadow)}
-        .admin-layout{display:grid;grid-template-columns:200px 1fr;min-height:calc(100vh-50px)}
-        .admin-sidebar{background:#fff;padding:1rem 0;border-right:1px solid var(--surface-dark)}
-        .admin-nav{list-style:none}
-        .admin-nav li{padding:0.6rem 1rem;display:flex;align-items:center;gap:0.5rem;cursor:pointer;font-size:0.85rem;color:var(--text-light);border-left:3px solid transparent;transition:all 0.2s}
-        .admin-nav li:hover{background:var(--surface);color:var(--primary)}
-        .admin-nav li.active{background:var(--surface);color:var(--accent);border-left-color:var(--accent)}
-        .admin-main{padding:1rem}
+        .admin-header{background:#fff;padding:0.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;box-shadow:var(--shadow);border-bottom:2px solid var(--accent)}
+        .admin-layout{display:grid;grid-template-columns:250px 1fr;min-height:calc(100vh - 60px)}
+        .admin-sidebar{background:#fff;padding:1.5rem 0;border-right:2px solid var(--surface-dark);box-shadow:2px 0 8px rgba(0,0,0,0.05)}
+        .admin-nav{list-style:none;padding:0;margin:0}
+        .admin-nav li{padding:0.85rem 1.5rem;display:flex;align-items:center;gap:0.75rem;cursor:pointer;font-size:0.95rem;color:var(--text);font-weight:500;border-left:4px solid transparent;transition:all 0.2s;position:relative}
+        .admin-nav li:hover{background:var(--surface);color:var(--accent);border-left-color:var(--accent)}
+        .admin-nav li.active{background:linear-gradient(90deg, var(--surface) 0%, #fff 100%);color:var(--accent);border-left-color:var(--accent);font-weight:600}
+        .admin-nav li::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--accent);opacity:0;transition:opacity 0.2s}
+        .admin-nav li.active::before{opacity:1}
+        .admin-main{padding:1.5rem;background:var(--surface);min-height:100%}
+        
+        /* Botón menú móvil admin */
+        .admin-mobile-toggle{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:0.5rem}
+        .admin-mobile-toggle span{display:block;width:24px;height:3px;background:var(--primary);border-radius:2px;transition:all 0.3s}
+        .admin-mobile-toggle.active span:nth-child(1){transform:rotate(45deg) translate(6px, 6px)}
+        .admin-mobile-toggle.active span:nth-child(2){opacity:0}
+        .admin-mobile-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(6px, -6px)}
+        
         .admin-page{display:none}
         .admin-page.active{display:block}
         .admin-title{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--primary);margin-bottom:1rem}
@@ -396,12 +408,23 @@
             .footer-links{text-align:center}
             
             /* Admin móvil */
+            .admin-mobile-toggle{display:flex}
             .admin-login{padding:1rem}
             .login-box{padding:1.25rem}
             .admin-header{padding:0.5rem 1rem}
             .admin-header h2{font-size:1.1rem}
             .admin-layout{grid-template-columns:1fr}
-            .admin-sidebar{display:none}
+            .admin-sidebar{
+                position:fixed;
+                left:-280px;
+                top:60px;
+                width:280px;
+                height:calc(100vh - 60px);
+                z-index:1000;
+                transition:left 0.3s;
+                box-shadow:2px 0 16px rgba(0,0,0,0.1);
+            }
+            .admin-sidebar.active{left:0}
             .admin-main{padding:0.75rem}
             .admin-title{font-size:1.2rem}
             .stats-grid{grid-template-columns:1fr;gap:0.6rem}
@@ -485,13 +508,13 @@
     <div class="main-site" id="mainSite">
         <header id="header">
             <div class="header-container">
-                <a href="#" class="logo" onclick="goTo('hero')"><div class="logo-icon"></div><span class="logo-text">INTERPLAST</span></a>
+                <a href="#" class="logo" onclick="goTo('hero', event); return false;"><div class="logo-icon"></div><span class="logo-text">INTERPLAST</span></a>
                 <nav id="nav">
-                    <a href="#" class="active" onclick="goTo('hero')">Inicio</a>
-                    <a href="#" onclick="goTo('products')">Productos</a>
-                    <a href="#" onclick="goTo('about')">Nosotros</a>
-                    <a href="#" onclick="goTo('contact')">Contacto</a>
-                    <a href="#" class="btn btn-primary" onclick="showLogin()">🔐 Admin</a>
+                    <a href="#" class="active" onclick="goTo('hero', event); return false;">Inicio</a>
+                    <a href="#" onclick="goTo('products', event); return false;">Productos</a>
+                    <a href="#" onclick="goTo('about', event); return false;">Nosotros</a>
+                    <a href="#" onclick="goTo('contact', event); return false;">Contacto</a>
+                    <a href="#" class="btn btn-primary" onclick="showLogin(); return false;">🔐 Admin</a>
                 </nav>
                 <button class="mobile-menu" id="mobileMenu" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
             </div>
@@ -503,8 +526,8 @@
                     <h1>PRODUCTOS PLÁSTICOS<br><span>AL POR MAYOR</span></h1>
                     <p>Distribuidores mayoristas de productos plásticos de alta calidad.</p>
                     <div class="hero-buttons">
-                        <a href="#" class="btn btn-accent" onclick="goTo('products')">Ver Catálogo</a>
-                        <a href="#" class="btn btn-outline" style="border-color:#fff;color:#fff" onclick="goTo('contact')">Cotizar</a>
+                        <a href="#" class="btn btn-accent" onclick="goTo('products', event); return false;">Ver Catálogo</a>
+                        <a href="#" class="btn btn-outline" style="border-color:#fff;color:#fff" onclick="goTo('contact', event); return false;">Cotizar</a>
                     </div>
                     <div class="hero-stats">
                         <div><span class="stat-number">15+</span><span class="stat-label">Años</span></div>
@@ -620,7 +643,7 @@
             <div class="container">
                 <div class="footer-grid">
                     <div class="footer-brand"><a href="#" class="logo"><div class="logo-icon"></div><span class="logo-text">INTERPLAST</span></a><p>Distribuidores mayoristas de productos plásticos.</p></div>
-                    <div class="footer-col"><h4>ENLACES</h4><ul class="footer-links"><li><a href="#" onclick="goTo('hero')">Inicio</a></li><li><a href="#" onclick="goTo('products')">Productos</a></li><li><a href="#" onclick="goTo('about')">Nosotros</a></li><li><a href="#" onclick="goTo('contact')">Contacto</a></li></ul></div>
+                    <div class="footer-col"><h4>ENLACES</h4><ul class="footer-links"><li><a href="#" onclick="goTo('hero', event); return false;">Inicio</a></li><li><a href="#" onclick="goTo('products', event); return false;">Productos</a></li><li><a href="#" onclick="goTo('about', event); return false;">Nosotros</a></li><li><a href="#" onclick="goTo('contact', event); return false;">Contacto</a></li></ul></div>
                     <div class="footer-col"><h4>CATEGORÍAS</h4><ul class="footer-links" id="footerCats"></ul></div>
                     <div class="footer-col"><h4>CONTACTO</h4><ul class="footer-links"><li>📍 Lima, Perú</li><li>📞 +51 1 234 5678</li><li>✉️ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f187949f859082b1989f859483819d908285df8194">[email&#160;protected]</a></li></ul></div>
                 </div>
@@ -640,8 +663,10 @@
                         <p class="modal-desc" id="mDesc"></p>
                         <div class="specs-list" id="mSpecs"></div>
                         <div class="modal-btns">
-                            <a href="#" class="btn btn-accent" onclick="closeModal();goTo('contact')">Cotizar</a>
-                            <a href="#" class="btn btn-outline" onclick="closeModal();goTo('contact')">Contactar</a>
+                            <a href="#" class="btn btn-accent" onclick="closeModal();goTo('contact', event); return false;">Cotizar</a>
+                            <a href="https://wa.me/51910701936?text=Hola%2C%20vengo%20de%20la%20p%C3%A1gina%20web%20INTERPLAST%20y%20estoy%20interesado%20en%20comprar%20sus%20productos" target="_blank" class="btn btn-outline">
+                                <span>💬 WhatsApp</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -665,7 +690,14 @@
 
     <div class="admin-dash" id="adminDash">
         <div class="admin-header">
-            <div class="logo"><div class="logo-icon"></div><span class="logo-text">INTERPLAST</span><span style="margin-left:0.5rem;padding:0.15rem 0.4rem;background:var(--accent);color:#fff;border-radius:3px;font-size:0.6rem">ADMIN</span></div>
+            <div style="display:flex;align-items:center;gap:1rem">
+                <button class="admin-mobile-toggle" id="adminMenuToggle" onclick="toggleAdminMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="logo"><div class="logo-icon"></div><span class="logo-text">INTERPLAST</span><span style="margin-left:0.5rem;padding:0.15rem 0.4rem;background:var(--accent);color:#fff;border-radius:3px;font-size:0.6rem">ADMIN</span></div>
+            </div>
             <button class="btn btn-outline btn-sm" onclick="logout()">Salir</button>
         </div>
         <div class="admin-layout">
@@ -716,8 +748,22 @@
             <div class="admin-modal-body">
                 <input type="hidden" id="prodId">
                 <div class="form-row"><div class="form-group"><label>Nombre *</label><input type="text" id="prodName" required></div><div class="form-group"><label>Marca *</label><select id="prodBrand"></select></div></div>
-                <div class="form-row"><div class="form-group"><label>Categoría *</label><select id="prodCat"></select></div><div class="form-group"><label>Capacidad</label><input type="text" id="prodCap"></div></div>
-                <div class="form-row"><div class="form-group"><label>Material</label><input type="text" id="prodMat"></div><div class="form-group"><label>Estado</label><select id="prodStatus"><option value="available">Disponible</option><option value="out_of_stock">Sin Stock</option></select></div></div>
+                <div class="form-row"><div class="form-group"><label>Categoría *</label><select id="prodCat"></select></div><div class="form-group"><label>Estado</label><select id="prodStatus"><option value="available">Disponible</option><option value="out_of_stock">Sin Stock</option></select></div></div>
+                
+                <!-- Sección de Dimensiones -->
+                <div style="margin:1rem 0;padding:0.75rem;background:rgba(233,69,96,0.05);border-left:3px solid var(--accent);border-radius:4px">
+                    <label style="font-family:'Bebas Neue',sans-serif;color:var(--accent);font-size:1rem;display:block;margin-bottom:0.5rem">DIMENSIONES</label>
+                    <div class="form-row">
+                        <div class="form-group"><label>Largo (ej: 17 CM)</label><input type="text" id="prodLargo" placeholder="17 CM"></div>
+                        <div class="form-group"><label>Ancho (ej: 17 CM)</label><input type="text" id="prodAncho" placeholder="17 CM"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Alto (ej: 8 CM)</label><input type="text" id="prodAlto" placeholder="8 CM"></div>
+                        <div class="form-group"><label>Capacidad (ej: 1.2 LT)</label><input type="text" id="prodCapacidad" placeholder="1.2 LT"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group"><label>Material</label><input type="text" id="prodMat" placeholder="ej: Plástico PP"></div>
                 <div class="form-group"><label>Descripción</label><textarea id="prodDesc"></textarea></div>
                 <div class="form-group">
                     <label>Imágenes</label>
@@ -1592,11 +1638,11 @@
         }
 
         // === NAV ===
-        function goTo(id) { 
+        function goTo(id, e) { 
+            if (e) e.preventDefault();
             document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active')); 
-            event?.target?.classList?.add('active'); 
-            if(id==='hero') window.scrollTo({top:0,behavior:'smooth'}); 
-            else document.getElementById(id)?.scrollIntoView({behavior:'smooth'}); 
+            if (id==='hero') window.scrollTo({top:0,behavior:'smooth'}); 
+            else document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'}); 
             closeMobileMenu();
         }
 
@@ -1632,7 +1678,7 @@
                     <p class="cat-count">${db.prods.filter(p=>p.cat===c.slug && p.status==='available').length} prod.</p>
                 </div>
             `).join('');
-            document.getElementById('footerCats').innerHTML = db.cats.map(c => `<li><a href="#" onclick="filter('${c.slug}')">${c.name}</a></li>`).join('');
+            document.getElementById('footerCats').innerHTML = db.cats.map(c => `<li><a href="#" onclick="filter('${c.slug}'); return false;">${c.name}</a></li>`).join('');
         }
 
         function renderFilters() {
@@ -1729,7 +1775,7 @@
                         <p class="prod-spec">📏 ${p.cap || 'N/A'}</p>
                         <div class="prod-actions">
                             <button class="btn btn-accent" onclick="event.stopPropagation();openDetail(${p.id})">Ver</button>
-                            <button class="btn btn-outline" onclick="event.stopPropagation();document.getElementById('cMsg').value='Interesado en: ${p.name}';goTo('contact')">Cotizar</button>
+                            <button class="btn btn-outline" onclick="event.stopPropagation();handleQuote('${p.name.replace(/'/g, "\\'")}')">Cotizar</button>
                         </div>
                     </div>
                 </div>
@@ -1799,7 +1845,29 @@
             }
             
             document.getElementById('mThumbs').innerHTML = p.imgs?.length > 1 ? p.imgs.map((img,i) => `<div class="modal-thumb ${i===0?'active':''}" onclick="changeModalImg('${img}', this)"><img src="${img}" alt="Vista ${i+1}"></div>`).join('') : '';
-            document.getElementById('mSpecs').innerHTML = `<div class="spec-row"><span>Código</span><span>${p.codigo || 'N/A'}</span></div><div class="spec-row"><span>Categoría</span><span>${c.name}</span></div><div class="spec-row"><span>Marca</span><span>${p.brand}</span></div><div class="spec-row"><span>Capacidad</span><span>${p.cap || 'N/A'}</span></div><div class="spec-row"><span>Material</span><span>${p.mat || 'N/A'}</span></div>`;
+            
+            // Tabla de especificaciones con nuevos campos
+            let specsHTML = `
+                <div class="spec-row"><span>Código</span><span>${p.codigo || 'N/A'}</span></div>
+                <div class="spec-row"><span>Categoría</span><span>${c.name}</span></div>
+                <div class="spec-row"><span>Marca</span><span>${p.brand}</span></div>
+            `;
+            
+            // Solo mostrar dimensiones si al menos una está definida
+            if (p.largo || p.ancho || p.alto || p.capacidad) {
+                specsHTML += `<div class="spec-section-title">DIMENSIONES</div>`;
+                if (p.largo) specsHTML += `<div class="spec-row"><span>Largo</span><span>${p.largo}</span></div>`;
+                if (p.ancho) specsHTML += `<div class="spec-row"><span>Ancho</span><span>${p.ancho}</span></div>`;
+                if (p.alto) specsHTML += `<div class="spec-row"><span>Alto</span><span>${p.alto}</span></div>`;
+                if (p.capacidad) specsHTML += `<div class="spec-row"><span>Capacidad</span><span>${p.capacidad}</span></div>`;
+            }
+            
+            // Material si existe
+            if (p.mat) {
+                specsHTML += `<div class="spec-row"><span>Material</span><span>${p.mat}</span></div>`;
+            }
+            
+            document.getElementById('mSpecs').innerHTML = specsHTML;
             document.getElementById('prodModal').classList.add('active');
         }
 
@@ -1810,6 +1878,14 @@
         }
 
         function closeModal() { document.getElementById('prodModal').classList.remove('active'); }
+        
+        function handleQuote(productName) {
+            const msgInput = document.getElementById('cMsg');
+            if (msgInput) {
+                msgInput.value = `Interesado en: ${productName}`;
+            }
+            goTo('contact');
+        }
 
         async function sendMsg(e) {
             e.preventDefault();
@@ -1881,10 +1957,26 @@
             document.querySelectorAll('.admin-page').forEach(pg => pg.classList.remove('active'));
             event.target.closest('li').classList.add('active');
             document.getElementById('page' + p.charAt(0).toUpperCase() + p.slice(1)).classList.add('active');
+            
+            // Cerrar menú móvil al cambiar de página
+            const sidebar = document.querySelector('.admin-sidebar');
+            const toggle = document.getElementById('adminMenuToggle');
+            if (sidebar && toggle) {
+                sidebar.classList.remove('active');
+                toggle.classList.remove('active');
+            }
+            
             if (p === 'prods') renderTblProds();
             else if (p === 'cats') renderTblCats();
             else if (p === 'brands') renderTblBrands();
             else if (p === 'msgs') renderTblMsgs();
+        }
+        
+        function toggleAdminMenu() {
+            const sidebar = document.querySelector('.admin-sidebar');
+            const toggle = document.getElementById('adminMenuToggle');
+            sidebar.classList.toggle('active');
+            toggle.classList.toggle('active');
         }
 
         function loadAdmin() { updateStats(); renderDashMsgs(); renderTblProds(); }
@@ -1970,8 +2062,33 @@
             document.getElementById('prodBrand').innerHTML = '<option value="">Seleccionar</option>' + db.brands.map(b => `<option value="${b.name}">${b.name}</option>`).join('');
             if (id) {
                 const p = db.prods.find(x => x.id === id);
-                if (p) { document.getElementById('prodId').value = p.id; document.getElementById('prodName').value = p.name; document.getElementById('prodCat').value = p.cat; document.getElementById('prodBrand').value = p.brand; document.getElementById('prodCap').value = p.cap; document.getElementById('prodMat').value = p.mat; document.getElementById('prodStatus').value = p.status; document.getElementById('prodDesc').value = p.desc; tempImgs = [...(p.imgs||[])]; }
-            } else { document.getElementById('prodId').value = ''; document.getElementById('prodName').value = ''; document.getElementById('prodCat').value = ''; document.getElementById('prodBrand').value = ''; document.getElementById('prodCap').value = ''; document.getElementById('prodMat').value = ''; document.getElementById('prodStatus').value = 'available'; document.getElementById('prodDesc').value = ''; }
+                if (p) { 
+                    document.getElementById('prodId').value = p.id; 
+                    document.getElementById('prodName').value = p.name; 
+                    document.getElementById('prodCat').value = p.cat; 
+                    document.getElementById('prodBrand').value = p.brand; 
+                    document.getElementById('prodLargo').value = p.largo || ''; 
+                    document.getElementById('prodAncho').value = p.ancho || ''; 
+                    document.getElementById('prodAlto').value = p.alto || ''; 
+                    document.getElementById('prodCapacidad').value = p.capacidad || ''; 
+                    document.getElementById('prodMat').value = p.mat || ''; 
+                    document.getElementById('prodStatus').value = p.status; 
+                    document.getElementById('prodDesc').value = p.desc || ''; 
+                    tempImgs = [...(p.imgs||[])]; 
+                }
+            } else { 
+                document.getElementById('prodId').value = ''; 
+                document.getElementById('prodName').value = ''; 
+                document.getElementById('prodCat').value = ''; 
+                document.getElementById('prodBrand').value = ''; 
+                document.getElementById('prodLargo').value = ''; 
+                document.getElementById('prodAncho').value = ''; 
+                document.getElementById('prodAlto').value = ''; 
+                document.getElementById('prodCapacidad').value = ''; 
+                document.getElementById('prodMat').value = ''; 
+                document.getElementById('prodStatus').value = 'available'; 
+                document.getElementById('prodDesc').value = ''; 
+            }
             renderImgPreview();
             document.getElementById('prodModalAdmin').classList.add('active');
         }
@@ -1979,7 +2096,19 @@
         function editProd(id) { openProdModal(id); }
         function saveProd() {
             const id = document.getElementById('prodId').value;
-            const data = { name: document.getElementById('prodName').value, cat: document.getElementById('prodCat').value, brand: document.getElementById('prodBrand').value, cap: document.getElementById('prodCap').value, mat: document.getElementById('prodMat').value, status: document.getElementById('prodStatus').value, desc: document.getElementById('prodDesc').value, imgs: [...tempImgs] };
+            const data = { 
+                name: document.getElementById('prodName').value, 
+                cat: document.getElementById('prodCat').value, 
+                brand: document.getElementById('prodBrand').value, 
+                largo: document.getElementById('prodLargo').value, 
+                ancho: document.getElementById('prodAncho').value, 
+                alto: document.getElementById('prodAlto').value, 
+                capacidad: document.getElementById('prodCapacidad').value, 
+                mat: document.getElementById('prodMat').value, 
+                status: document.getElementById('prodStatus').value, 
+                desc: document.getElementById('prodDesc').value, 
+                imgs: [...tempImgs] 
+            };
             if (id) { const i = db.prods.findIndex(p => p.id === parseInt(id)); if (i !== -1) db.prods[i] = { ...db.prods[i], ...data }; toast('Actualizado'); }
             else { data.id = Math.max(...db.prods.map(p => p.id), 0) + 1; db.prods.push(data); toast('Creado'); }
             closeProdModal(); renderTblProds(); renderProds(curFilter); renderHero(); updateStats();

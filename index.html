@@ -72,7 +72,8 @@
         .hero-products{display:grid;grid-template-columns:repeat(2,1fr);gap:0.75rem}
         .hero-card{background:rgba(255,255,255,0.1);border-radius:var(--radius);padding:1rem;text-align:center;cursor:pointer;transition:all 0.2s}
         .hero-card:hover{background:rgba(255,255,255,0.15);transform:translateY(-3px)}
-        .hero-card-icon{width:50px;height:50px;margin:0 auto 0.5rem;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+        .hero-card-icon{width:60px;height:60px;margin:0 auto 0.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;overflow:hidden;background:#fff}
+        .hero-card-icon img{width:100%;height:100%;object-fit:cover}
         .hero-card-name{color:#fff;font-weight:500;font-size:0.85rem;line-height:1.2}
 
         /* Sections */
@@ -83,16 +84,18 @@
         .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,3vw,2.2rem);color:var(--primary);letter-spacing:2px}
 
         /* Brands */
-        .brands{background:#fff;padding:1.5rem 0;border-bottom:1px solid var(--surface-dark)}
-        .brands-grid{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap}
-        .brand-item{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:var(--text-light);opacity:0.5;transition:all 0.2s}
-        .brand-item:hover{opacity:1;color:var(--accent)}
+        .brands{background:#fff;padding:2rem 0;border-bottom:1px solid var(--surface-dark)}
+        .brands-grid{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;max-width:900px;margin:0 auto}
+        .brand-item{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:var(--text-light);opacity:0.6;transition:all 0.3s;cursor:pointer;padding:0.5rem 1rem;border-radius:var(--radius-sm);position:relative}
+        .brand-item:hover{opacity:1;color:var(--accent);background:var(--surface);transform:translateY(-2px)}
+        .brand-item.active{opacity:1;color:#fff;background:var(--accent);box-shadow:var(--shadow)}
 
         /* Categories */
         .categories-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem}
         .cat-card{background:#fff;border-radius:var(--radius);padding:1.25rem;text-align:center;box-shadow:var(--shadow);cursor:pointer;transition:all 0.2s}
         .cat-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover)}
-        .cat-icon{width:60px;height:60px;margin:0 auto 0.75rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem}
+        .cat-icon{width:70px;height:70px;margin:0 auto 0.75rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;overflow:hidden;background:#fff}
+        .cat-icon img{width:100%;height:100%;object-fit:cover}
         .cat-name{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;color:var(--primary)}
         .cat-count{color:var(--text-light);font-size:0.75rem}
 
@@ -105,11 +108,12 @@
         .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
         .prod-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);cursor:pointer;border:1px solid var(--surface-dark);transition:all 0.2s;touch-action:manipulation}
         .prod-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover)}
-        .prod-img{position:relative;height:140px;display:flex;align-items:center;justify-content:center;font-size:3rem}
-        .prod-badge{position:absolute;top:0.5rem;left:0.5rem;padding:0.2rem 0.5rem;border-radius:50px;font-size:0.6rem;font-weight:600}
+        .prod-img{position:relative;height:180px;display:flex;align-items:center;justify-content:center;font-size:3rem;overflow:hidden;background:var(--surface)}
+        .prod-img img{width:100%;height:100%;object-fit:contain;padding:0.5rem}
+        .prod-badge{position:absolute;top:0.5rem;left:0.5rem;padding:0.2rem 0.5rem;border-radius:50px;font-size:0.6rem;font-weight:600;z-index:2}
         .badge-ok{background:var(--success);color:#fff}
         .badge-no{background:var(--danger);color:#fff}
-        .prod-brand{position:absolute;top:0.5rem;right:0.5rem;background:var(--primary);color:#fff;padding:0.15rem 0.4rem;border-radius:3px;font-size:0.55rem;font-weight:600;text-transform:uppercase}
+        .prod-brand{position:absolute;top:0.5rem;right:0.5rem;background:var(--primary);color:#fff;padding:0.15rem 0.4rem;border-radius:3px;font-size:0.55rem;font-weight:600;text-transform:uppercase;z-index:2}
         .prod-info{padding:0.75rem}
         .prod-cat{font-size:0.65rem;color:var(--accent);text-transform:uppercase;font-weight:600;margin-bottom:0.2rem}
         .prod-name{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--primary);margin-bottom:0.25rem}
@@ -124,11 +128,14 @@
         .modal-close{position:absolute;top:0.5rem;right:0.5rem;width:30px;height:30px;border-radius:50%;background:var(--surface);border:none;cursor:pointer;font-size:1.1rem;z-index:10}
         .modal-close:hover{background:var(--accent);color:#fff}
         .modal-grid{display:grid;grid-template-columns:1fr 1fr}
-        .modal-img{background:var(--surface);padding:1.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center}
-        .modal-main-img{font-size:5rem;margin-bottom:0.5rem}
-        .modal-thumbs{display:flex;gap:0.3rem}
-        .modal-thumb{width:40px;height:40px;border-radius:4px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:1.2rem;cursor:pointer;border:2px solid transparent}
-        .modal-thumb.active{border-color:var(--accent)}
+        .modal-img{background:var(--surface);padding:1.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:400px}
+        .modal-main-img{width:100%;max-width:400px;height:350px;font-size:5rem;margin-bottom:0.5rem;display:flex;align-items:center;justify-content:center;position:relative}
+        .modal-main-img img{width:100%;height:100%;object-fit:contain}
+        .modal-thumbs{display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center}
+        .modal-thumb{width:60px;height:60px;border-radius:6px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:1.5rem;cursor:pointer;border:2px solid transparent;transition:all 0.2s;overflow:hidden}
+        .modal-thumb img{width:100%;height:100%;object-fit:contain;padding:0.2rem}
+        .modal-thumb:hover{border-color:var(--accent);transform:scale(1.05)}
+        .modal-thumb.active{border-color:var(--accent);box-shadow:0 0 0 2px rgba(233,69,96,0.2)}
         .modal-info{padding:1.5rem}
         .modal-badge{display:inline-block;padding:0.2rem 0.6rem;border-radius:50px;font-size:0.65rem;font-weight:600;margin-bottom:0.5rem}
         .modal-brand{font-size:0.8rem;color:var(--accent);text-transform:uppercase;font-weight:600}
@@ -222,7 +229,8 @@
         .admin-table th{background:var(--surface);font-size:0.7rem;text-transform:uppercase;color:var(--text-light)}
         .admin-table tr{border-bottom:1px solid var(--surface-dark)}
         .admin-table tr:hover{background:var(--surface)}
-        .tbl-img{width:40px;height:40px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+        .tbl-img{width:50px;height:50px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;overflow:hidden;background:var(--surface)}
+        .tbl-img img{width:100%;height:100%;object-fit:contain;padding:0.2rem}
         .tbl-actions{display:flex;gap:0.2rem}
         .tbl-btn{width:26px;height:26px;border-radius:4px;border:none;cursor:pointer;font-size:0.8rem}
         .tbl-btn.edit{background:#dbeafe;color:#2563eb}
@@ -315,7 +323,7 @@
             .stat-label{font-size:0.7rem}
             .hero-products{grid-template-columns:repeat(2,1fr);gap:0.6rem;max-width:100%}
             .hero-card{padding:0.75rem}
-            .hero-card-icon{width:40px;height:40px;font-size:1.2rem}
+            .hero-card-icon{width:50px;height:50px;font-size:1.2rem}
             
             /* Secciones */
             section{padding:2.5rem 0}
@@ -326,7 +334,7 @@
             /* Categorías */
             .categories-grid{grid-template-columns:repeat(2,1fr);gap:0.75rem}
             .cat-card{padding:1rem}
-            .cat-icon{width:50px;height:50px;font-size:1.5rem;margin-bottom:0.5rem}
+            .cat-icon{width:60px;height:60px;font-size:1.5rem;margin-bottom:0.5rem;overflow:hidden}
             .cat-name{font-size:0.9rem}
             
             /* Productos */
@@ -334,7 +342,7 @@
             .filter-btn{padding:0.4rem 0.8rem;font-size:0.75rem}
             .products-grid{grid-template-columns:repeat(2,1fr);gap:0.75rem}
             .prod-card{font-size:0.85rem}
-            .prod-img{height:120px;font-size:2.5rem}
+            .prod-img{height:150px;font-size:2.5rem}
             .prod-info{padding:0.6rem}
             .prod-name{font-size:0.9rem}
             .prod-spec{font-size:0.7rem}
@@ -412,7 +420,7 @@
             .stat-number{font-size:1.5rem}
             .hero-products{grid-template-columns:repeat(3,1fr);gap:0.5rem;max-width:100%}
             .hero-card{padding:0.6rem}
-            .hero-card-icon{width:35px;height:35px;font-size:1.1rem;margin-bottom:0.35rem}
+            .hero-card-icon{width:40px;height:40px;font-size:1.1rem;margin-bottom:0.35rem}
             .hero-card-name{font-size:0.75rem}
             
             .section-title{font-size:1.4rem}
@@ -421,8 +429,8 @@
             
             .products-grid{grid-template-columns:1fr;max-width:300px;margin:0 auto}
             
-            .brands-grid{gap:1rem}
-            .brand-item{font-size:1rem}
+            .brands-grid{gap:0.75rem;padding:0 1rem}
+            .brand-item{font-size:0.9rem;padding:0.4rem 0.75rem}
             
             .about-box{height:180px;font-size:3rem}
             .about-badge{width:60px;height:60px;bottom:-10px;right:-10px}
@@ -487,7 +495,7 @@
 
         <section class="brands">
             <div class="container">
-                <div class="brands-grid"><div class="brand-item">DUKE</div><div class="brand-item">MAGINZA</div><div class="brand-item">URPI</div><div class="brand-item">KOSMO</div><div class="brand-item">REY</div></div>
+                <div class="brands-grid" id="brandsGrid"></div>
             </div>
         </section>
 
@@ -716,22 +724,22 @@
         // Base de datos con TODOS LOS PRODUCTOS DEL EXCEL - 723 productos, 16 categorías, 48 marcas
         let db = {
             cats: [
-                {id:1,name:'Baldes',slug:'baldes',icon:'🪣',color:'#3b82f6'},
-                {id:2,name:'Tachos',slug:'tachos',icon:'🗑️',color:'#10b981'},
-                {id:3,name:'Cestos',slug:'cestos',icon:'🧺',color:'#f59e0b'},
-                {id:4,name:'Tinas',slug:'tinas',icon:'🛁',color:'#8b5cf6'},
-                {id:5,name:'Bañeras',slug:'baneras',icon:'🚿',color:'#06b6d4'},
-                {id:6,name:'Bacines',slug:'bacines',icon:'🚽',color:'#84cc16'},
-                {id:7,name:'Tapers',slug:'tapers',icon:'📦',color:'#ec4899'},
-                {id:8,name:'Envases',slug:'envases',icon:'🫙',color:'#f97316'},
-                {id:9,name:'Azucareras',slug:'azucareras',icon:'🍯',color:'#eab308'},
-                {id:10,name:'Jarras',slug:'jarras',icon:'🫗',color:'#14b8a6'},
-                {id:11,name:'Vasos',slug:'vasos',icon:'🥤',color:'#ef4444'},
-                {id:12,name:'Bancos',slug:'bancos',icon:'🪑',color:'#a855f7'},
-                {id:13,name:'Mesas',slug:'mesas',icon:'🪟',color:'#6366f1'},
-                {id:14,name:'Escobas',slug:'escobas',icon:'🧹',color:'#22c55e'},
-                {id:15,name:'Alcancías',slug:'alcancias',icon:'🐷',color:'#f43f5e'},
-                {id:16,name:'Otros',slug:'otros',icon:'📋',color:'#64748b'}
+                {id:1,name:'Baldes',slug:'baldes',icon:'https://www.maginsa.com/wp-content/uploads/2022/11/balde-1.png',color:'#3b82f6',isImage:true},
+                {id:2,name:'Tachos',slug:'tachos',icon:'https://www.mallplast.pe/image/cache/catalog/mall/qplast/tacho-pachacutec-150-l-ii-c-tapa-1100x1100.jpg',color:'#10b981',isImage:true},
+                {id:3,name:'Cestos',slug:'cestos',icon:'https://www.rosadito.com.pe/wp-content/uploads/2022/09/TULIPAN.jpg',color:'#f59e0b',isImage:true},
+                {id:4,name:'Tinas',slug:'tinas',icon:'https://www.mallplast.pe/image/cache/catalog/mall/qplast/tina-barquita-chica-ii-1100x1100.jpg',color:'#8b5cf6',isImage:true},
+                {id:5,name:'Bañeras',slug:'baneras',icon:'https://www.aplasticos.com/images/infantil/tina_bb.jpg',color:'#06b6d4',isImage:true},
+                {id:6,name:'Bacines',slug:'bacines',icon:'https://www.almaceneslaurita.com/img/products_store/1000058_mini.webp',color:'#84cc16',isImage:true},
+                {id:7,name:'Tapers',slug:'tapers',icon:'https://dojiw2m9tvv09.cloudfront.net/75518/product/X_taper-europea-1kg8721.png?793&t=1769012801',color:'#ec4899',isImage:true},
+                {id:8,name:'Envases',slug:'envases',icon:'https://arcomexperu.com/wp-content/uploads/2023/04/Envases-para-cremas.webp',color:'#f97316',isImage:true},
+                {id:9,name:'Azucareras',slug:'azucareras',icon:'https://www.mabplas.com.pe/wp-content/uploads/2022/04/mabplas-azucarera-parisl-azul.jpg',color:'#eab308',isImage:true},
+                {id:10,name:'Jarras',slug:'jarras',icon:'https://promart.vteximg.com.br/arquivos/ids/867240-1000-1000/123845.jpg?v=637533227651930000',color:'#14b8a6',isImage:true},
+                {id:11,name:'Vasos',slug:'vasos',icon:'https://www.maginsa.com/wp-content/uploads/2021/05/vasos.jpg',color:'#ef4444',isImage:true},
+                {id:12,name:'Bancos',slug:'bancos',icon:'https://www.reyplast.pe/blog/wp-content/uploads/2017/09/banco-de-plastico-ratan-solido.jpg',color:'#a855f7',isImage:true},
+                {id:13,name:'Mesas',slug:'mesas',icon:'https://promart.vteximg.com.br/arquivos/ids/9131453-1000-1000/161217.jpg?v=638884760693970000',color:'#6366f1',isImage:true},
+                {id:14,name:'Escobas',slug:'escobas',icon:'https://productosdelimpiezalima.com/image/catalog/categorias/escobas.jpeg',color:'#22c55e',isImage:true},
+                {id:15,name:'Alcancías',slug:'alcancias',icon:'https://bsecommerceprod.blob.core.windows.net/magento/catalog/product/cache/bc9e311e664dbb5929888a78159490c8/7/4/7441089928893-a.jpg',color:'#f43f5e',isImage:true},
+                {id:16,name:'Otros',slug:'otros',icon:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT962xVd0TBAitZyPPF88DoqBbHQLKEypk_lg&s',color:'#64748b',isImage:true}
             ],
             brands: [
                 {id:1,name:'ABHER'},{id:2,name:'ABRIL'},{id:3,name:'ANGUPAST'},{id:4,name:'ANULADO-3'},
@@ -1478,7 +1486,7 @@
             ]
         };
 
-        let tempImgs = [], curFilter = 'all';
+        let tempImgs = [], curFilter = 'all', curBrand = 'all';
 
         // === COMPRESSION ===
         function compress(file) {
@@ -1519,7 +1527,22 @@
         // === UTILS ===
         function toast(m) { const t = document.getElementById('toast'); t.textContent = m; t.className = 'toast success show'; setTimeout(() => t.classList.remove('show'), 2000); }
         function getCat(slug) { return db.cats.find(c => c.slug === slug) || {icon:'📦',color:'#666',name:''}; }
-        function getIcon(p) { return p.imgs?.length ? `<img src="${p.imgs[0]}" style="width:100%;height:100%;object-fit:contain">` : getCat(p.cat).icon; }
+        function getCatIcon(cat) {
+            if (cat.isImage) {
+                return `<img src="${cat.icon}" alt="${cat.name}" onerror="this.style.display='none';this.parentElement.innerHTML='📦'">`;
+            }
+            return cat.icon;
+        }
+        function getIcon(p) { 
+            if (p.imgs?.length) {
+                return `<img src="${p.imgs[0]}" alt="${p.name}" style="width:100%;height:100%;object-fit:contain;padding:0.5rem">`;
+            }
+            const cat = getCat(p.cat);
+            if (cat.isImage) {
+                return `<img src="${cat.icon}" alt="${cat.name}" style="width:100%;height:100%;object-fit:contain;padding:0.5rem" onerror="this.style.display='none';this.parentElement.innerHTML='${cat.icon}'">`;
+            }
+            return `<span style="font-size:3rem">${cat.icon}</span>`;
+        }
 
         // === NAV ===
         function goTo(id) { 
@@ -1548,7 +1571,7 @@
         function renderHero() {
             document.getElementById('heroCards').innerHTML = db.cats.slice(0,4).map(c => `
                 <div class="hero-card" onclick="filter('${c.slug}')">
-                    <div class="hero-card-icon" style="background:${c.color}20">${c.icon}</div>
+                    <div class="hero-card-icon" style="background:${c.color}20">${getCatIcon(c)}</div>
                     <div class="hero-card-name">${c.name}</div>
                 </div>
             `).join('');
@@ -1557,7 +1580,7 @@
         function renderCats() {
             document.getElementById('catsGrid').innerHTML = db.cats.map(c => `
                 <div class="cat-card" onclick="filter('${c.slug}')">
-                    <div class="cat-icon" style="background:${c.color}20">${c.icon}</div>
+                    <div class="cat-icon" style="background:${c.color}20">${getCatIcon(c)}</div>
                     <h3 class="cat-name">${c.name.toUpperCase()}</h3>
                     <p class="cat-count">${db.prods.filter(p=>p.cat===c.slug).length} prod.</p>
                 </div>
@@ -1569,10 +1592,58 @@
             document.getElementById('filterBar').innerHTML = `<button class="filter-btn active" onclick="filter('all')">Todos</button>` + db.cats.map(c => `<button class="filter-btn" onclick="filter('${c.slug}')">${c.name}</button>`).join('');
         }
 
+        function renderBrands() {
+            // Obtener marcas con productos (ordenadas por cantidad)
+            const brandCounts = {};
+            db.prods.forEach(p => {
+                brandCounts[p.brand] = (brandCounts[p.brand] || 0) + 1;
+            });
+            
+            // Tomar top marcas o todas si hay pocas
+            const sortedBrands = Object.entries(brandCounts)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 15) // Top 15 marcas
+                .map(([name]) => name);
+            
+            document.getElementById('brandsGrid').innerHTML = sortedBrands.map(brand => 
+                `<div class="brand-item" onclick="filterByBrand('${brand.replace(/'/g, "\\'")}')">${brand}</div>`
+            ).join('');
+        }
+
+        function filterByBrand(brand) {
+            curBrand = brand;
+            curFilter = 'all'; // Reset category filter
+            
+            // Update brand UI
+            document.querySelectorAll('.brand-item').forEach(b => {
+                b.classList.toggle('active', b.textContent === brand);
+            });
+            
+            // Reset category filters
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector('.filter-btn')?.classList.add('active');
+            
+            // Filter and render products
+            const list = db.prods.filter(p => p.brand === brand);
+            renderProductsList(list);
+            
+            // Scroll to products
+            goTo('products');
+        }
+
         function renderProds(f = 'all') {
             curFilter = f;
+            curBrand = 'all'; // Reset brand filter when filtering by category
+            
+            // Reset brand UI
+            document.querySelectorAll('.brand-item').forEach(b => b.classList.remove('active'));
+            
             const list = f === 'all' ? db.prods : db.prods.filter(p => p.cat === f);
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase() === (f === 'all' ? 'todos' : getCat(f).name.toLowerCase())));
+            renderProductsList(list);
+        }
+
+        function renderProductsList(list) {
             document.getElementById('prodsGrid').innerHTML = list.map(p => {
                 const c = getCat(p.cat);
                 return `
@@ -1585,7 +1656,7 @@
                     <div class="prod-info">
                         <p class="prod-cat">${c.name}</p>
                         <h3 class="prod-name">${p.name}</h3>
-                        <p class="prod-spec">📏 ${p.cap}</p>
+                        <p class="prod-spec">📏 ${p.cap || 'N/A'}</p>
                         <div class="prod-actions">
                             <button class="btn btn-accent" onclick="event.stopPropagation();openDetail(${p.id})">Ver</button>
                             <button class="btn btn-outline" onclick="event.stopPropagation();document.getElementById('cMsg').value='Interesado en: ${p.name}';goTo('contact')">Cotizar</button>
@@ -1593,6 +1664,11 @@
                     </div>
                 </div>
             `}).join('');
+            
+            // Show message if no products
+            if (list.length === 0) {
+                document.getElementById('prodsGrid').innerHTML = '<div style="text-align:center;padding:3rem;color:var(--text-light)"><h3>No se encontraron productos</h3><p>Intenta con otro filtro</p></div>';
+            }
         }
 
         function filter(cat) { goTo('products'); setTimeout(() => renderProds(cat), 150); }
@@ -1606,10 +1682,25 @@
             document.getElementById('mBrand').textContent = p.brand;
             document.getElementById('mTitle').textContent = p.name;
             document.getElementById('mDesc').textContent = p.desc;
-            document.getElementById('mImg').innerHTML = p.imgs?.length ? `<img src="${p.imgs[0]}" style="max-width:100%;max-height:150px">` : `<span style="font-size:4rem">${c.icon}</span>`;
-            document.getElementById('mThumbs').innerHTML = p.imgs?.length > 1 ? p.imgs.map((img,i) => `<div class="modal-thumb ${i===0?'active':''}" onclick="document.getElementById('mImg').innerHTML='<img src=\\'${img}\\' style=\\'max-width:100%;max-height:150px\\'>';document.querySelectorAll('.modal-thumb').forEach(t=>t.classList.remove('active'));this.classList.add('active')"><img src="${img}" style="width:100%;height:100%;object-fit:contain"></div>`).join('') : '';
-            document.getElementById('mSpecs').innerHTML = `<div class="spec-row"><span>Categoría</span><span>${c.name}</span></div><div class="spec-row"><span>Marca</span><span>${p.brand}</span></div><div class="spec-row"><span>Capacidad</span><span>${p.cap}</span></div><div class="spec-row"><span>Material</span><span>${p.mat}</span></div>`;
+            
+            // Mostrar imagen del producto o icono de categoría
+            if (p.imgs?.length) {
+                document.getElementById('mImg').innerHTML = `<img src="${p.imgs[0]}" alt="${p.name}">`;
+            } else if (c.isImage) {
+                document.getElementById('mImg').innerHTML = `<img src="${c.icon}" alt="${c.name}" onerror="this.parentElement.innerHTML='<span style=\\'font-size:5rem\\'>${c.icon}</span>'">`;
+            } else {
+                document.getElementById('mImg').innerHTML = `<span style="font-size:5rem">${c.icon}</span>`;
+            }
+            
+            document.getElementById('mThumbs').innerHTML = p.imgs?.length > 1 ? p.imgs.map((img,i) => `<div class="modal-thumb ${i===0?'active':''}" onclick="changeModalImg('${img}', this)"><img src="${img}" alt="Vista ${i+1}"></div>`).join('') : '';
+            document.getElementById('mSpecs').innerHTML = `<div class="spec-row"><span>Código</span><span>${p.codigo || 'N/A'}</span></div><div class="spec-row"><span>Categoría</span><span>${c.name}</span></div><div class="spec-row"><span>Marca</span><span>${p.brand}</span></div><div class="spec-row"><span>Capacidad</span><span>${p.cap || 'N/A'}</span></div><div class="spec-row"><span>Material</span><span>${p.mat || 'N/A'}</span></div>`;
             document.getElementById('prodModal').classList.add('active');
+        }
+
+        function changeModalImg(imgSrc, element) {
+            document.getElementById('mImg').innerHTML = `<img src="${imgSrc}" alt="Producto">`;
+            document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
+            element.classList.add('active');
         }
 
         function closeModal() { document.getElementById('prodModal').classList.remove('active'); }
@@ -1675,7 +1766,7 @@
 
         function renderTblCats() {
             document.getElementById('tblCats').innerHTML = db.cats.map(c => `<tr>
-                <td><div class="tbl-img" style="background:${c.color}15">${c.icon}</div></td>
+                <td><div class="tbl-img" style="background:${c.color}15">${getCatIcon(c)}</div></td>
                 <td><strong>${c.name}</strong></td>
                 <td>${db.prods.filter(p=>p.cat===c.slug).length}</td>
                 <td><div class="tbl-actions"><button class="tbl-btn edit" onclick="editCat(${c.id})">✏️</button><button class="tbl-btn del" onclick="delCat(${c.id})">🗑️</button></div></td>
@@ -1795,8 +1886,9 @@
             renderHero();
             renderCats();
             renderFilters();
+            renderBrands();
             renderProds();
-            console.log('✅ INTERPLAST cargado correctamente');
+            console.log('✅ INTERPLAST cargado correctamente - 723 productos, 16 categorías, 48 marcas');
         });
     </script>
 </body>

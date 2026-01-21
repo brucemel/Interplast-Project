@@ -105,21 +105,21 @@
         .filter-btn{padding:0.5rem 1rem;border:1px solid var(--surface-dark);background:#fff;border-radius:50px;font-weight:500;cursor:pointer;font-family:inherit;font-size:0.8rem;transition:all 0.2s}
         .filter-btn:hover,.filter-btn.active{border-color:var(--accent);color:var(--accent)}
         .filter-btn.active{background:var(--accent);color:#fff}
-        .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
+        .products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;max-width:1400px;margin:0 auto}
         .prod-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);cursor:pointer;border:1px solid var(--surface-dark);transition:all 0.2s;touch-action:manipulation}
         .prod-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover)}
-        .prod-img{position:relative;height:180px;display:flex;align-items:center;justify-content:center;font-size:3rem;overflow:hidden;background:var(--surface)}
-        .prod-img img{width:100%;height:100%;object-fit:contain;padding:0.5rem}
-        .prod-badge{position:absolute;top:0.5rem;left:0.5rem;padding:0.2rem 0.5rem;border-radius:50px;font-size:0.6rem;font-weight:600;z-index:2}
+        .prod-img{position:relative;height:280px;display:flex;align-items:center;justify-content:center;font-size:4rem;overflow:hidden;background:#fff;border-radius:var(--radius) var(--radius) 0 0}
+        .prod-img img{width:100%;height:100%;object-fit:cover}
+        .prod-badge{position:absolute;top:0.75rem;left:0.75rem;padding:0.4rem 0.75rem;border-radius:50px;font-size:0.85rem;font-weight:700;z-index:2;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
         .badge-ok{background:var(--success);color:#fff}
         .badge-no{background:var(--danger);color:#fff}
-        .prod-brand{position:absolute;top:0.5rem;right:0.5rem;background:var(--primary);color:#fff;padding:0.15rem 0.4rem;border-radius:3px;font-size:0.55rem;font-weight:600;text-transform:uppercase;z-index:2}
-        .prod-info{padding:0.75rem}
-        .prod-cat{font-size:0.65rem;color:var(--accent);text-transform:uppercase;font-weight:600;margin-bottom:0.2rem}
-        .prod-name{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--primary);margin-bottom:0.25rem}
-        .prod-spec{font-size:0.75rem;color:var(--text-light);margin-bottom:0.5rem}
-        .prod-actions{display:flex;gap:0.3rem}
-        .prod-actions .btn{flex:1;justify-content:center;padding:0.4rem;font-size:0.7rem}
+        .prod-brand{position:absolute;top:0.75rem;right:0.75rem;background:var(--primary);color:#fff;padding:0.3rem 0.75rem;border-radius:6px;font-size:0.75rem;font-weight:700;text-transform:uppercase;z-index:2;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
+        .prod-info{padding:1.25rem}
+        .prod-cat{font-size:0.8rem;color:var(--accent);text-transform:uppercase;font-weight:700;margin-bottom:0.4rem;letter-spacing:0.5px}
+        .prod-name{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--primary);margin-bottom:0.4rem;line-height:1.2}
+        .prod-spec{font-size:0.9rem;color:var(--text-light);margin-bottom:0.75rem}
+        .prod-actions{display:flex;gap:0.5rem}
+        .prod-actions .btn{flex:1;justify-content:center;padding:0.6rem 0.75rem;font-size:0.85rem;font-weight:600}
 
         /* Modal */
         .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:2000;display:none;align-items:center;justify-content:center;padding:1rem}
@@ -340,9 +340,9 @@
             /* Productos */
             .filter-bar{gap:0.4rem}
             .filter-btn{padding:0.4rem 0.8rem;font-size:0.75rem}
-            .products-grid{grid-template-columns:repeat(2,1fr);gap:0.75rem}
+            .products-grid{grid-template-columns:repeat(3,1fr);gap:1rem}
             .prod-card{font-size:0.85rem}
-            .prod-img{height:150px;font-size:2.5rem}
+            .prod-img{height:220px;font-size:3rem}
             .prod-info{padding:0.6rem}
             .prod-name{font-size:0.9rem}
             .prod-spec{font-size:0.7rem}
@@ -427,7 +427,7 @@
             
             .categories-grid{grid-template-columns:1fr;max-width:300px;margin:0 auto}
             
-            .products-grid{grid-template-columns:1fr;max-width:300px;margin:0 auto}
+            .products-grid{grid-template-columns:repeat(2,1fr);gap:0.75rem;max-width:100%}
             
             .brands-grid{gap:0.75rem;padding:0 1rem}
             .brand-item{font-size:0.9rem;padding:0.4rem 0.75rem}
@@ -1535,13 +1535,13 @@
         }
         function getIcon(p) { 
             if (p.imgs?.length) {
-                return `<img src="${p.imgs[0]}" alt="${p.name}" style="width:100%;height:100%;object-fit:contain;padding:0.5rem">`;
+                return `<img src="${p.imgs[0]}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover">`;
             }
             const cat = getCat(p.cat);
             if (cat.isImage) {
-                return `<img src="${cat.icon}" alt="${cat.name}" style="width:100%;height:100%;object-fit:contain;padding:0.5rem" onerror="this.style.display='none';this.parentElement.innerHTML='${cat.icon}'">`;
+                return `<img src="${cat.icon}" alt="${cat.name}" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\\'font-size:4rem\\'>${cat.icon}</span>'">`;
             }
-            return `<span style="font-size:3rem">${cat.icon}</span>`;
+            return `<span style="font-size:4rem">${cat.icon}</span>`;
         }
 
         // === NAV ===
@@ -1582,7 +1582,7 @@
                 <div class="cat-card" onclick="filter('${c.slug}')">
                     <div class="cat-icon" style="background:${c.color}20">${getCatIcon(c)}</div>
                     <h3 class="cat-name">${c.name.toUpperCase()}</h3>
-                    <p class="cat-count">${db.prods.filter(p=>p.cat===c.slug).length} prod.</p>
+                    <p class="cat-count">${db.prods.filter(p=>p.cat===c.slug && p.status==='available').length} prod.</p>
                 </div>
             `).join('');
             document.getElementById('footerCats').innerHTML = db.cats.map(c => `<li><a href="#" onclick="filter('${c.slug}')">${c.name}</a></li>`).join('');
@@ -1644,12 +1644,15 @@
         }
 
         function renderProductsList(list) {
-            document.getElementById('prodsGrid').innerHTML = list.map(p => {
+            // FILTRAR: Solo mostrar productos con stock disponible
+            const availableProducts = list.filter(p => p.status === 'available');
+            
+            document.getElementById('prodsGrid').innerHTML = availableProducts.map(p => {
                 const c = getCat(p.cat);
                 return `
                 <div class="prod-card" onclick="openDetail(${p.id})">
                     <div class="prod-img" style="background:${c.color}15">
-                        <span class="prod-badge ${p.status==='available'?'badge-ok':'badge-no'}">${p.status==='available'?'✓':'✗'}</span>
+                        <span class="prod-badge badge-ok">✓</span>
                         <span class="prod-brand">${p.brand}</span>
                         ${getIcon(p)}
                     </div>
@@ -1665,9 +1668,9 @@
                 </div>
             `}).join('');
             
-            // Show message if no products
-            if (list.length === 0) {
-                document.getElementById('prodsGrid').innerHTML = '<div style="text-align:center;padding:3rem;color:var(--text-light)"><h3>No se encontraron productos</h3><p>Intenta con otro filtro</p></div>';
+            // Show message if no products available
+            if (availableProducts.length === 0) {
+                document.getElementById('prodsGrid').innerHTML = '<div style="text-align:center;padding:3rem;color:var(--text-light)"><h3>No hay productos disponibles</h3><p>Todos los productos de esta categoría están agotados temporalmente</p></div>';
             }
         }
 
@@ -1742,7 +1745,10 @@
 
         function updateStats() {
             const unread = db.msgs.filter(m => m.status === 'unread').length;
-            document.getElementById('sProds').textContent = db.prods.length;
+            const available = db.prods.filter(p => p.status === 'available').length;
+            const outOfStock = db.prods.filter(p => p.status === 'out_of_stock').length;
+            
+            document.getElementById('sProds').textContent = `${available} disponibles`;
             document.getElementById('sCats').textContent = db.cats.length;
             document.getElementById('sBrands').textContent = db.brands.length;
             document.getElementById('sMsgs').textContent = unread;
@@ -1754,12 +1760,19 @@
         }
 
         function renderTblProds() {
-            document.getElementById('tblProds').innerHTML = db.prods.map(p => `<tr>
+            // ORDENAR: Productos disponibles primero, sin stock al final
+            const sortedProds = [...db.prods].sort((a, b) => {
+                if (a.status === 'available' && b.status !== 'available') return -1;
+                if (a.status !== 'available' && b.status === 'available') return 1;
+                return 0;
+            });
+            
+            document.getElementById('tblProds').innerHTML = sortedProds.map(p => `<tr style="${p.status !== 'available' ? 'opacity:0.6;background:#f5f5f5' : ''}">
                 <td><div class="tbl-img" style="background:${getCat(p.cat).color}15">${getIcon(p)}</div></td>
                 <td><strong>${p.name}</strong></td>
                 <td>${getCat(p.cat).name}</td>
                 <td>${p.brand}</td>
-                <td><span class="status ${p.status==='available'?'status-ok':'status-no'}">${p.status==='available'?'✓':'✗'}</span></td>
+                <td><span class="status ${p.status==='available'?'status-ok':'status-no'}">${p.status==='available'?'Disponible':'Sin Stock'}</span></td>
                 <td><div class="tbl-actions"><button class="tbl-btn edit" onclick="editProd(${p.id})">✏️</button><button class="tbl-btn del" onclick="delProd(${p.id})">🗑️</button></div></td>
             </tr>`).join('');
         }
